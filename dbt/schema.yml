@@ -1,0 +1,14 @@
+version: 2
+
+models:
+  - name: vw_ranking_ministerios
+    columns:
+      - name: orgao_superior
+        tests:
+          - not_null
+          - unique
+      - name: total_pago
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
