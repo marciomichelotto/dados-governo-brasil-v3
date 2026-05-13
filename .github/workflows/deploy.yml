@@ -157,7 +157,8 @@ jobs:
           dbt compile \
             --profiles-dir ~/.dbt \
             --project-dir . \
-            --select gold
+            --select gold \
+            --empty-catalog
 
       # -----------------------------------------------------------------------
       # 8. dbt test — executa os testes de qualidade definidos no schema.yml
