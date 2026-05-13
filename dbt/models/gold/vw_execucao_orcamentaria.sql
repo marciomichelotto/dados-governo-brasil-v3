@@ -9,7 +9,7 @@ WITH EXECUCAO_MENSAL AS (
         ROUND((SUM(s.valor_pago) / NULLIF(SUM(s.valor_empenhado), 0)) * 100, 2) AS execucao_mensal,
         ROUND((SUM(s.valor_liquidado) / NULLIF(SUM(s.valor_empenhado), 0)) * 100, 2) AS liquidacao_mensal,
         ROUND((SUM(s.valor_pago) / NULLIF(SUM(s.valor_liquidado), 0)) * 100, 2) AS eficiencia_pagamento
-    FROM {{ ref('tb_silver_despesas') }} s
+    FROM {{ source('silver', 'TB_SILVER_DESPESAS') }} s
     GROUP BY s.orgao_superior, s.data_referencia
 )
 SELECT

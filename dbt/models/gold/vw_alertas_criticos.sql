@@ -7,7 +7,7 @@ WITH METRICAS_CRITICAS AS (
         ROUND(SUM(s.valor_restos_pagar), 2) AS restos_mes,
         ROUND((SUM(s.valor_restos_pagar) / NULLIF(SUM(s.valor_empenhado), 0)) * 100, 2) AS percentual_restos,
         SUM(CASE WHEN s.valor_empenhado < 0 THEN 1 ELSE 0 END) AS qtd_empenhos_negativos
-    FROM {{ ref('tb_silver_despesas') }} s
+    FROM {{ source('silver', 'TB_SILVER_DESPESAS') }} s
     GROUP BY s.orgao_superior, s.orgao_vinculado, s.data_referencia
 )
 SELECT
