@@ -1,6 +1,6 @@
 WITH TOTAIS_GERAIS AS (
     SELECT SUM(valor_pago) AS total_geral
-    FROM {{ ref('tb_silver_despesas') }}
+    FROM {{ source('silver', 'TB_SILVER_DESPESAS') }}
     WHERE valor_pago > 0
 )
 SELECT
@@ -13,7 +13,7 @@ SELECT
     ROUND((SUM(s.valor_pago) / tg.total_geral) * 100, 2) AS percentual_do_total,
     RANK() OVER (ORDER BY SUM(s.valor_pago) DESC) AS ranking_pago,
     ROUND((SUM(s.valor_pago) / NULLIF(SUM(s.valor_empenhado), 0)) * 100, 2) AS taxa_execucao
-FROM {{ ref('tb_silver_despesas') }} s
+FROM {{ source('silver', 'TB_SILVER_DESPESAS') }} s
 CROSS JOIN TOTAIS_GERAIS tg
 GROUP BY s.orgao_superior, tg.total_geral
 HAVING SUM(s.valor_pago) > 0
