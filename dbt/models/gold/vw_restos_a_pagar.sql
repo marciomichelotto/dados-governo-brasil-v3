@@ -7,7 +7,7 @@ WITH RESTOS_POR_MINISTERIO AS (
         ROUND((SUM(s.valor_restos_pagar) / NULLIF(SUM(s.valor_empenhado), 0)) * 100, 2) AS percentual_empenhado_restos,
         MIN(s.data_referencia) AS primeiro_mes_restos,
         MAX(s.data_referencia) AS ultimo_mes_restos
-    FROM {{ ref('tb_silver_despesas') }} s
+    FROM {{ source('silver', 'TB_SILVER_DESPESAS') }} s
     WHERE s.valor_restos_pagar > 0
     GROUP BY s.orgao_superior
 )
