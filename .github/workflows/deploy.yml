@@ -114,7 +114,7 @@ jobs:
                 type: snowflake
                 account: ${SNOWFLAKE_ACCOUNT}
                 user: ${SNOWFLAKE_USER}
-                password: ${SNOWFLAKE_PASSWORD}
+                password: '${SNOWFLAKE_PASSWORD}'
                 role: ${SNOWFLAKE_ROLE}
                 database: ${SNOWFLAKE_DATABASE}
                 warehouse: ${SNOWFLAKE_WAREHOUSE}
@@ -227,7 +227,7 @@ jobs:
           [connections.ci]
           accountname = ${SNOWFLAKE_ACCOUNT}
           username = ${SNOWFLAKE_USER}
-          password = ${SNOWFLAKE_PASSWORD}
+          password = '${SNOWFLAKE_PASSWORD}'
           dbname = ${SNOWFLAKE_DATABASE}
           warehousename = ${SNOWFLAKE_WAREHOUSE}
           schemaname = ${SNOWFLAKE_SCHEMA}
