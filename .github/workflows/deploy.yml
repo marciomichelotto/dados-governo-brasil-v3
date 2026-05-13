@@ -77,13 +77,13 @@ jobs:
       # 1. Checkout do repositório
       # -----------------------------------------------------------------------
       - name: Checkout do código
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       # -----------------------------------------------------------------------
       # 2. Configura Python (necessário para dbt e sqlfluff)
       # -----------------------------------------------------------------------
       - name: Setup Python 3.11
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.11'
           cache: 'pip'             # cacheia dependências entre runs
@@ -206,7 +206,7 @@ jobs:
     steps:
 
       - name: Checkout do código
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       # -----------------------------------------------------------------------
       # Instala SnowSQL CLI para executar os arquivos SQL no Snowflake
@@ -255,7 +255,7 @@ jobs:
       # Deploy dos modelos dbt (Gold)
       # -----------------------------------------------------------------------
       - name: Setup Python para dbt
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.11'
           cache: 'pip'
