@@ -139,7 +139,7 @@ jobs:
         run: |
           sqlfluff lint snowflake/ \
             --dialect snowflake \
-            --exclude-rules L034,L031 \
+            --exclude-rules L034,L031,CP02,LT02,LT01 \
             --format github-annotation \
             --annotation-level warning
         continue-on-error: true   # não quebra o build por style, só por erros graves
