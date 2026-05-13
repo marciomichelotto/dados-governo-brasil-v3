@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: silver
+    database: DADOS_GOVERNO
+    schema: SILVER
+    tables:
+      - name: TB_SILVER_DESPESAS
