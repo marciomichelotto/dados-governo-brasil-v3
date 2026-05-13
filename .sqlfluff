@@ -1,0 +1,48 @@
+# =============================================================================
+# .sqlfluff  |  Configuração do SQL Linter
+# Projeto    : dados-governo-brasil-v3
+# Autor      : Marcio Michelotto
+#
+# POR QUE ESSAS REGRAS ESTÃO DESATIVADAS?
+#
+#   CP02 — Identificadores em uppercase
+#     Nomes de colunas em snake_case (minúsculo) são a convenção adotada
+#     neste projeto para compatibilidade com dbt e Power BI.
+#     Ex: orgao_superior, valor_pago, mes_ano_dt
+#
+#   LT01 (espaçamento antes de tipo) — Alinhamento de colunas em DDL
+#     Em DDL (CREATE TABLE), alinhar os tipos de dado com espaços extras
+#     é uma prática legítima que melhora a legibilidade:
+#       mes_ano_dt       DATE
+#       orgao_superior   VARCHAR(500)
+#       valor_pago       NUMBER(20,2)
+#     O sqlfluff interpreta isso como "espaço extra" — mas é intencional.
+#
+#   LT02 — Indentação em arquivos de setup
+#     Os arquivos de stage (02_stage.sql) usam indentação dentro de blocos
+#     de configuração do Snowflake (FILE_FORMAT, COPY_OPTIONS) que o
+#     sqlfluff não reconhece como contexto válido para indentação.
+# =============================================================================
+
+[sqlfluff]
+dialect = snowflake
+templater = raw
+exclude_rules = CP02, LT02
+
+# Indentação padrão: 4 espaços
+[sqlfluff:indentation]
+indent_unit = space
+tab_space_size = 4
+
+# LT01: permite espaços extras APENAS antes de tipos de dado
+# (para alinhamento em DDL — CREATE TABLE, PROCEDURE)
+[sqlfluff:rules:layout.spacing]
+allow_implicit_aliasing = False
+
+# Arquivos e pastas a ignorar no lint
+[sqlfluff:templater:jinja]
+ignore = dbt_project.yml
+
+# Ignora arquivos gerados pelo dbt (compilados)
+[sqlfluff:layout:type:comma]
+spacing_after = single
