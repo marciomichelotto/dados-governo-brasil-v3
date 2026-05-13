@@ -1,0 +1,543 @@
+[0m11:51:27.293416 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000022535C52050>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000022535C51D90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000022535C5B450>]}
+
+
+============================== 11:51:27.300414 | 65117f00-b291-4606-a58d-22a9cd83dd56 ==============================
+[0m11:51:27.300414 [info ] [MainThread]: Running with dbt=1.11.9
+[0m11:51:27.301412 [debug] [MainThread]: running dbt with arguments {'version_check': 'True', 'no_print': 'None', 'static_parser': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'printer_width': '80', 'write_json': 'True', 'empty': 'None', 'log_cache_events': 'False', 'introspect': 'True', 'cache_selected_only': 'False', 'log_format': 'default', 'debug': 'False', 'fail_fast': 'False', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'profiles_dir': 'C:\\Users\\cecc001\\Documents\\MÁRCIO\\dados-governo-brasil-v3\\dbt', 'use_colors': 'True', 'indirect_selection': 'eager', 'invocation_command': 'dbt debug', 'use_experimental_parser': 'False', 'log_path': 'C:\\Users\\cecc001\\Documents\\MÁRCIO\\dados-governo-brasil-v3\\dbt\\logs'}
+[0m11:51:27.335393 [info ] [MainThread]: dbt version: 1.11.9
+[0m11:51:27.336393 [info ] [MainThread]: python version: 3.11.9
+[0m11:51:27.337391 [info ] [MainThread]: python path: C:\Users\cecc001\Documents\MÁRCIO\projeto-gov-V3\dbt-env\Scripts\python.exe
+[0m11:51:27.337391 [info ] [MainThread]: os info: Windows-10-10.0.19045-SP0
+[0m11:51:28.253274 [debug] [MainThread]: Snowflake adapter: Setting snowflake.connector to ERROR (file logging only)
+[0m11:51:28.254274 [debug] [MainThread]: Snowflake adapter: Setting botocore to ERROR (file logging only)
+[0m11:51:28.255273 [debug] [MainThread]: Snowflake adapter: Setting boto3 to ERROR (file logging only)
+[0m11:51:28.477146 [info ] [MainThread]: Using profiles dir at C:\Users\cecc001\Documents\MÁRCIO\dados-governo-brasil-v3\dbt
+[0m11:51:28.483143 [info ] [MainThread]: Using profiles.yml file at C:\Users\cecc001\Documents\MÁRCIO\dados-governo-brasil-v3\dbt\profiles.yml
+[0m11:51:28.487140 [info ] [MainThread]: Using dbt_project.yml file at C:\Users\cecc001\Documents\MÁRCIO\dados-governo-brasil-v3\dbt\dbt_project.yml
+[0m11:51:28.510128 [info ] [MainThread]: adapter type: snowflake
+[0m11:51:28.514125 [info ] [MainThread]: adapter version: 1.11.4
+[0m11:51:28.521121 [info ] [MainThread]: Configuration:
+[0m11:51:28.522122 [info ] [MainThread]:   profiles.yml file [[32mOK found and valid[0m]
+[0m11:51:28.524119 [info ] [MainThread]:   dbt_project.yml file [[31mERROR invalid[0m]
+[0m11:51:28.526118 [info ] [MainThread]: Required dependencies:
+[0m11:51:28.528117 [debug] [MainThread]: Executing "git --help"
+[0m11:51:28.646049 [debug] [MainThread]: STDOUT: "b"usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]\n           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]\n           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--no-lazy-fetch]\n           [--no-optional-locks] [--no-advice] [--bare] [--git-dir=<path>]\n           [--work-tree=<path>] [--namespace=<name>] [--config-env=<name>=<envvar>]\n           <command> [<args>]\n\nThese are common Git commands used in various situations:\n\nstart a working area (see also: git help tutorial)\n   clone      Clone a repository into a new directory\n   init       Create an empty Git repository or reinitialize an existing one\n\nwork on the current change (see also: git help everyday)\n   add        Add file contents to the index\n   mv         Move or rename a file, a directory, or a symlink\n   restore    Restore working tree files\n   rm         Remove files from the working tree and from the index\n\nexamine the history and state (see also: git help revisions)\n   bisect     Use binary search to find the commit that introduced a bug\n   diff       Show changes between commits, commit and working tree, etc\n   grep       Print lines matching a pattern\n   log        Show commit logs\n   show       Show various types of objects\n   status     Show the working tree status\n\ngrow, mark and tweak your common history\n   backfill   Download missing objects in a partial clone\n   branch     List, create, or delete branches\n   commit     Record changes to the repository\n   merge      Join two or more development histories together\n   rebase     Reapply commits on top of another base tip\n   reset      Set `HEAD` or the index to a known state\n   switch     Switch branches\n   tag        Create, list, delete or verify tags\n\ncollaborate (see also: git help workflows)\n   fetch      Download objects and refs from another repository\n   pull       Fetch from and integrate with another repository or a local branch\n   push       Update remote refs along with associated objects\n\n'git help -a' and 'git help -g' list available subcommands and some\nconcept guides. See 'git help <command>' or 'git help <concept>'\nto read about a specific subcommand or concept.\nSee 'git help git' for an overview of the system.\n""
+[0m11:51:28.647049 [debug] [MainThread]: STDERR: "b''"
+[0m11:51:28.649049 [info ] [MainThread]:  - git [[32mOK found[0m]
+
+[0m11:51:28.650047 [info ] [MainThread]: Connection:
+[0m11:51:28.651047 [info ] [MainThread]:   account: MKQAYBK-CK27934
+[0m11:51:28.652046 [info ] [MainThread]:   user: MARCIOMICHELOTTO
+[0m11:51:28.654044 [info ] [MainThread]:   database: GOV_V3
+[0m11:51:28.655044 [info ] [MainThread]:   warehouse: COMPUTE_WH
+[0m11:51:28.656044 [info ] [MainThread]:   role: ACCOUNTADMIN
+[0m11:51:28.657043 [info ] [MainThread]:   schema: dbt_mmichelotto
+[0m11:51:28.659041 [info ] [MainThread]:   authenticator: externalbrowser
+[0m11:51:28.660042 [info ] [MainThread]:   oauth_client_id: None
+[0m11:51:28.661041 [info ] [MainThread]:   query_tag: None
+[0m11:51:28.662040 [info ] [MainThread]:   client_session_keep_alive: False
+[0m11:51:28.664039 [info ] [MainThread]:   host: None
+[0m11:51:28.665039 [info ] [MainThread]:   port: None
+[0m11:51:28.667038 [info ] [MainThread]:   proxy_host: None
+[0m11:51:28.668037 [info ] [MainThread]:   proxy_port: None
+[0m11:51:28.670036 [info ] [MainThread]:   protocol: None
+[0m11:51:28.671035 [info ] [MainThread]:   connect_retries: 1
+[0m11:51:28.673034 [info ] [MainThread]:   connect_timeout: None
+[0m11:51:28.679032 [info ] [MainThread]:   retry_on_database_errors: False
+[0m11:51:28.683028 [info ] [MainThread]:   retry_all: False
+[0m11:51:28.685027 [info ] [MainThread]:   insecure_mode: False
+[0m11:51:28.686027 [info ] [MainThread]:   reuse_connections: True
+[0m11:51:28.700019 [info ] [MainThread]:   s3_stage_vpce_dns_name: None
+[0m11:51:28.702018 [info ] [MainThread]:   platform_detection_timeout_seconds: 0.0
+[0m11:51:28.709015 [info ] [MainThread]: Registered adapter: snowflake=1.11.4
+[0m11:51:29.295810 [debug] [MainThread]: Acquiring new snowflake connection 'debug'
+[0m11:51:32.744862 [debug] [MainThread]: Using snowflake connection "debug"
+[0m11:51:32.745861 [debug] [MainThread]: On debug: select 1 as id
+[0m11:51:32.747861 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m11:51:35.148776 [debug] [MainThread]: Snowflake adapter: Error running SQL: select 1 as id
+[0m11:51:35.149777 [debug] [MainThread]: Snowflake adapter: Rolling back transaction.
+[0m11:51:35.149777 [info ] [MainThread]:   Connection test: [[31mERROR[0m]
+
+[0m11:51:35.150776 [info ] [MainThread]: [31m2 checks failed:[0m
+[0m11:51:35.153773 [info ] [MainThread]: Project loading failed for the following reason:
+Runtime Error
+  Required "name" field not present in project
+
+Error encountered in C:\Users\cecc001\Documents\MÁRCIO\dados-governo-brasil-v3\dbt\dbt_project.yml
+
+
+[0m11:51:35.158771 [info ] [MainThread]: dbt was unable to connect to the specified database.
+The database returned the following error:
+
+  >Database Error
+  390190 (08001): Failed to connect to DB: MKQAYBK-CK27934.snowflakecomputing.com:443, There was an error related to the SAML Identity Provider account parameter. Contact Snowflake support.
+
+Check your database credentials and try again. For more information, visit:
+https://docs.getdbt.com/docs/configure-your-profile
+
+
+[0m11:51:35.160772 [debug] [MainThread]: Command `dbt debug` failed at 11:51:35.160772 after 7.98 seconds
+[0m11:51:35.161769 [debug] [MainThread]: Connection 'debug' was left open.
+[0m11:51:35.161769 [debug] [MainThread]: On debug: No close available on handle
+[0m11:51:35.162769 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002252F0F6F90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000022536D5D390>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000022534D8A190>]}
+[0m11:51:35.162769 [debug] [MainThread]: Flushing usage events
+[0m11:51:36.350834 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m12:25:37.173525 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000021CF3EF89D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000021CF4EF9150>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000021CF4EF91D0>]}
+
+
+============================== 12:25:37.181541 | abbce369-a4ae-4e21-add4-33bd36a3e1a3 ==============================
+[0m12:25:37.181541 [info ] [MainThread]: Running with dbt=1.11.9
+[0m12:25:37.182520 [debug] [MainThread]: running dbt with arguments {'static_parser': 'True', 'no_print': 'None', 'version_check': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'log_cache_events': 'False', 'empty': 'None', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'profiles_dir': 'C:\\Users\\cecc001\\Documents\\MÁRCIO\\dados-governo-brasil-v3\\dbt', 'invocation_command': 'dbt debug', 'indirect_selection': 'eager', 'use_colors': 'True', 'use_experimental_parser': 'False', 'log_path': 'C:\\Users\\cecc001\\Documents\\MÁRCIO\\dados-governo-brasil-v3\\dbt\\logs'}
+[0m12:25:37.219499 [info ] [MainThread]: dbt version: 1.11.9
+[0m12:25:37.219499 [info ] [MainThread]: python version: 3.11.9
+[0m12:25:37.220496 [info ] [MainThread]: python path: C:\Users\cecc001\Documents\MÁRCIO\projeto-gov-V3\dbt-env\Scripts\python.exe
+[0m12:25:37.221509 [info ] [MainThread]: os info: Windows-10-10.0.19045-SP0
+[0m12:25:37.226495 [info ] [MainThread]: Using profiles dir at C:\Users\cecc001\Documents\MÁRCIO\dados-governo-brasil-v3\dbt
+[0m12:25:37.227494 [info ] [MainThread]: Using profiles.yml file at C:\Users\cecc001\Documents\MÁRCIO\dados-governo-brasil-v3\dbt\profiles.yml
+[0m12:25:37.228494 [info ] [MainThread]: Using dbt_project.yml file at C:\Users\cecc001\Documents\MÁRCIO\dados-governo-brasil-v3\dbt\dbt_project.yml
+[0m12:25:37.462359 [info ] [MainThread]: Configuration:
+[0m12:25:37.464359 [info ] [MainThread]:   profiles.yml file [[31mERROR invalid[0m]
+[0m12:25:37.465357 [info ] [MainThread]:   dbt_project.yml file [[32mOK found and valid[0m]
+[0m12:25:37.466357 [info ] [MainThread]: Required dependencies:
+[0m12:25:37.468357 [debug] [MainThread]: Executing "git --help"
+[0m12:25:37.535318 [debug] [MainThread]: STDOUT: "b"usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]\n           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]\n           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--no-lazy-fetch]\n           [--no-optional-locks] [--no-advice] [--bare] [--git-dir=<path>]\n           [--work-tree=<path>] [--namespace=<name>] [--config-env=<name>=<envvar>]\n           <command> [<args>]\n\nThese are common Git commands used in various situations:\n\nstart a working area (see also: git help tutorial)\n   clone      Clone a repository into a new directory\n   init       Create an empty Git repository or reinitialize an existing one\n\nwork on the current change (see also: git help everyday)\n   add        Add file contents to the index\n   mv         Move or rename a file, a directory, or a symlink\n   restore    Restore working tree files\n   rm         Remove files from the working tree and from the index\n\nexamine the history and state (see also: git help revisions)\n   bisect     Use binary search to find the commit that introduced a bug\n   diff       Show changes between commits, commit and working tree, etc\n   grep       Print lines matching a pattern\n   log        Show commit logs\n   show       Show various types of objects\n   status     Show the working tree status\n\ngrow, mark and tweak your common history\n   backfill   Download missing objects in a partial clone\n   branch     List, create, or delete branches\n   commit     Record changes to the repository\n   merge      Join two or more development histories together\n   rebase     Reapply commits on top of another base tip\n   reset      Set `HEAD` or the index to a known state\n   switch     Switch branches\n   tag        Create, list, delete or verify tags\n\ncollaborate (see also: git help workflows)\n   fetch      Download objects and refs from another repository\n   pull       Fetch from and integrate with another repository or a local branch\n   push       Update remote refs along with associated objects\n\n'git help -a' and 'git help -g' list available subcommands and some\nconcept guides. See 'git help <command>' or 'git help <concept>'\nto read about a specific subcommand or concept.\nSee 'git help git' for an overview of the system.\n""
+[0m12:25:37.536318 [debug] [MainThread]: STDERR: "b''"
+[0m12:25:37.538318 [info ] [MainThread]:  - git [[32mOK found[0m]
+
+[0m12:25:37.539315 [info ] [MainThread]: Connection test skipped since no profile was found
+[0m12:25:37.541313 [info ] [MainThread]: [31m1 check failed:[0m
+[0m12:25:37.543313 [info ] [MainThread]: Profile loading failed for the following reason:
+Runtime Error
+  Could not find profile named 'dbt_project'
+
+
+[0m12:25:37.546313 [debug] [MainThread]: Command `dbt debug` failed at 12:25:37.545312 after 0.47 seconds
+[0m12:25:37.547311 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000021CED326F10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000021CED327010>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000021CF2B2C750>]}
+[0m12:25:37.548310 [debug] [MainThread]: Flushing usage events
+[0m12:25:38.543749 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m12:32:37.256103 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002B26F36D090>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002B274637010>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002B274637710>]}
+
+
+============================== 12:32:37.261100 | abd3d6f7-af1f-4cda-9dec-7cb9d1ab4627 ==============================
+[0m12:32:37.261100 [info ] [MainThread]: Running with dbt=1.11.9
+[0m12:32:37.262101 [debug] [MainThread]: running dbt with arguments {'version_check': 'True', 'no_print': 'None', 'static_parser': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'printer_width': '80', 'write_json': 'True', 'empty': 'None', 'log_cache_events': 'False', 'introspect': 'True', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'profiles_dir': 'C:\\Users\\cecc001\\Documents\\MÁRCIO\\dados-governo-brasil-v3\\dbt', 'use_colors': 'True', 'indirect_selection': 'eager', 'invocation_command': 'dbt debug', 'use_experimental_parser': 'False', 'log_path': 'C:\\Users\\cecc001\\Documents\\MÁRCIO\\dados-governo-brasil-v3\\dbt\\logs'}
+[0m12:32:37.289096 [info ] [MainThread]: dbt version: 1.11.9
+[0m12:32:37.290082 [info ] [MainThread]: python version: 3.11.9
+[0m12:32:37.291095 [info ] [MainThread]: python path: C:\Users\cecc001\Documents\MÁRCIO\projeto-gov-V3\dbt-env\Scripts\python.exe
+[0m12:32:37.291095 [info ] [MainThread]: os info: Windows-10-10.0.19045-SP0
+[0m12:32:38.120608 [debug] [MainThread]: Snowflake adapter: Setting snowflake.connector to ERROR (file logging only)
+[0m12:32:38.122605 [debug] [MainThread]: Snowflake adapter: Setting botocore to ERROR (file logging only)
+[0m12:32:38.123605 [debug] [MainThread]: Snowflake adapter: Setting boto3 to ERROR (file logging only)
+[0m12:32:38.295507 [info ] [MainThread]: Using profiles dir at C:\Users\cecc001\Documents\MÁRCIO\dados-governo-brasil-v3\dbt
+[0m12:32:38.297507 [info ] [MainThread]: Using profiles.yml file at C:\Users\cecc001\Documents\MÁRCIO\dados-governo-brasil-v3\dbt\profiles.yml
+[0m12:32:38.298506 [info ] [MainThread]: Using dbt_project.yml file at C:\Users\cecc001\Documents\MÁRCIO\dados-governo-brasil-v3\dbt\dbt_project.yml
+[0m12:32:38.301504 [info ] [MainThread]: adapter type: snowflake
+[0m12:32:38.303503 [info ] [MainThread]: adapter version: 1.11.4
+[0m12:32:38.582344 [info ] [MainThread]: Configuration:
+[0m12:32:38.585342 [info ] [MainThread]:   profiles.yml file [[32mOK found and valid[0m]
+[0m12:32:38.587341 [info ] [MainThread]:   dbt_project.yml file [[32mOK found and valid[0m]
+[0m12:32:38.588340 [info ] [MainThread]: Required dependencies:
+[0m12:32:38.590338 [debug] [MainThread]: Executing "git --help"
+[0m12:32:38.671292 [debug] [MainThread]: STDOUT: "b"usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]\n           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]\n           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--no-lazy-fetch]\n           [--no-optional-locks] [--no-advice] [--bare] [--git-dir=<path>]\n           [--work-tree=<path>] [--namespace=<name>] [--config-env=<name>=<envvar>]\n           <command> [<args>]\n\nThese are common Git commands used in various situations:\n\nstart a working area (see also: git help tutorial)\n   clone      Clone a repository into a new directory\n   init       Create an empty Git repository or reinitialize an existing one\n\nwork on the current change (see also: git help everyday)\n   add        Add file contents to the index\n   mv         Move or rename a file, a directory, or a symlink\n   restore    Restore working tree files\n   rm         Remove files from the working tree and from the index\n\nexamine the history and state (see also: git help revisions)\n   bisect     Use binary search to find the commit that introduced a bug\n   diff       Show changes between commits, commit and working tree, etc\n   grep       Print lines matching a pattern\n   log        Show commit logs\n   show       Show various types of objects\n   status     Show the working tree status\n\ngrow, mark and tweak your common history\n   backfill   Download missing objects in a partial clone\n   branch     List, create, or delete branches\n   commit     Record changes to the repository\n   merge      Join two or more development histories together\n   rebase     Reapply commits on top of another base tip\n   reset      Set `HEAD` or the index to a known state\n   switch     Switch branches\n   tag        Create, list, delete or verify tags\n\ncollaborate (see also: git help workflows)\n   fetch      Download objects and refs from another repository\n   pull       Fetch from and integrate with another repository or a local branch\n   push       Update remote refs along with associated objects\n\n'git help -a' and 'git help -g' list available subcommands and some\nconcept guides. See 'git help <command>' or 'git help <concept>'\nto read about a specific subcommand or concept.\nSee 'git help git' for an overview of the system.\n""
+[0m12:32:38.673292 [debug] [MainThread]: STDERR: "b''"
+[0m12:32:38.674291 [info ] [MainThread]:  - git [[32mOK found[0m]
+
+[0m12:32:38.675292 [info ] [MainThread]: Connection:
+[0m12:32:38.677289 [info ] [MainThread]:   account: MKQAYBK-CK27934
+[0m12:32:38.678289 [info ] [MainThread]:   user: MARCIOMICHELOTTO
+[0m12:32:38.679288 [info ] [MainThread]:   database: GOV_V3
+[0m12:32:38.681286 [info ] [MainThread]:   warehouse: COMPUTE_WH
+[0m12:32:38.682285 [info ] [MainThread]:   role: ACCOUNTADMIN
+[0m12:32:38.683285 [info ] [MainThread]:   schema: dbt_mmichelotto
+[0m12:32:38.684285 [info ] [MainThread]:   authenticator: externalbrowser
+[0m12:32:38.686283 [info ] [MainThread]:   oauth_client_id: None
+[0m12:32:38.687283 [info ] [MainThread]:   query_tag: None
+[0m12:32:38.690282 [info ] [MainThread]:   client_session_keep_alive: False
+[0m12:32:38.692280 [info ] [MainThread]:   host: None
+[0m12:32:38.694279 [info ] [MainThread]:   port: None
+[0m12:32:38.696277 [info ] [MainThread]:   proxy_host: None
+[0m12:32:38.697277 [info ] [MainThread]:   proxy_port: None
+[0m12:32:38.698277 [info ] [MainThread]:   protocol: None
+[0m12:32:38.700276 [info ] [MainThread]:   connect_retries: 1
+[0m12:32:38.702274 [info ] [MainThread]:   connect_timeout: None
+[0m12:32:38.704273 [info ] [MainThread]:   retry_on_database_errors: False
+[0m12:32:38.705272 [info ] [MainThread]:   retry_all: False
+[0m12:32:38.707273 [info ] [MainThread]:   insecure_mode: False
+[0m12:32:38.709271 [info ] [MainThread]:   reuse_connections: True
+[0m12:32:38.710270 [info ] [MainThread]:   s3_stage_vpce_dns_name: None
+[0m12:32:38.712270 [info ] [MainThread]:   platform_detection_timeout_seconds: 0.0
+[0m12:32:38.714268 [info ] [MainThread]: Registered adapter: snowflake=1.11.4
+[0m12:32:39.237966 [debug] [MainThread]: Acquiring new snowflake connection 'debug'
+[0m12:32:39.327916 [debug] [MainThread]: Using snowflake connection "debug"
+[0m12:32:39.327916 [debug] [MainThread]: On debug: select 1 as id
+[0m12:32:39.328915 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m12:32:39.760670 [debug] [MainThread]: Snowflake adapter: Error running SQL: select 1 as id
+[0m12:32:39.761670 [debug] [MainThread]: Snowflake adapter: Rolling back transaction.
+[0m12:32:39.762668 [info ] [MainThread]:   Connection test: [[31mERROR[0m]
+
+[0m12:32:39.763666 [info ] [MainThread]: [31m1 check failed:[0m
+[0m12:32:39.764667 [info ] [MainThread]: dbt was unable to connect to the specified database.
+The database returned the following error:
+
+  >Database Error
+  390190 (08001): Failed to connect to DB: MKQAYBK-CK27934.snowflakecomputing.com:443, There was an error related to the SAML Identity Provider account parameter. Contact Snowflake support.
+
+Check your database credentials and try again. For more information, visit:
+https://docs.getdbt.com/docs/configure-your-profile
+
+
+[0m12:32:39.766666 [debug] [MainThread]: Command `dbt debug` failed at 12:32:39.766666 after 2.62 seconds
+[0m12:32:39.768664 [debug] [MainThread]: Connection 'debug' was left open.
+[0m12:32:39.768664 [debug] [MainThread]: On debug: No close available on handle
+[0m12:32:39.769665 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002B2734A9E50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002B26CBA6310>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002B275109E90>]}
+[0m12:32:39.770663 [debug] [MainThread]: Flushing usage events
+[0m12:32:40.757106 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m12:41:17.183538 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002DBC43F5010>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002DBC432DED0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002DBC40B8090>]}
+
+
+============================== 12:41:17.190534 | 4be08469-452f-4cc7-aa0f-cd75f17cbcd8 ==============================
+[0m12:41:17.190534 [info ] [MainThread]: Running with dbt=1.11.9
+[0m12:41:17.193533 [debug] [MainThread]: running dbt with arguments {'static_parser': 'True', 'no_print': 'None', 'version_check': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'log_cache_events': 'False', 'empty': 'None', 'cache_selected_only': 'False', 'log_format': 'default', 'debug': 'False', 'fail_fast': 'False', 'profiles_dir': 'C:\\Users\\cecc001\\Documents\\MÁRCIO\\dados-governo-brasil-v3\\dbt', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'partial_parse': 'True', 'invocation_command': 'dbt debug', 'use_colors': 'True', 'indirect_selection': 'eager', 'use_experimental_parser': 'False', 'log_path': 'C:\\Users\\cecc001\\Documents\\MÁRCIO\\dados-governo-brasil-v3\\dbt\\logs'}
+[0m12:41:17.229512 [info ] [MainThread]: dbt version: 1.11.9
+[0m12:41:17.230514 [info ] [MainThread]: python version: 3.11.9
+[0m12:41:17.233509 [info ] [MainThread]: python path: C:\Users\cecc001\Documents\MÁRCIO\projeto-gov-V3\dbt-env\Scripts\python.exe
+[0m12:41:17.238506 [info ] [MainThread]: os info: Windows-10-10.0.19045-SP0
+[0m12:41:18.092017 [debug] [MainThread]: Snowflake adapter: Setting snowflake.connector to ERROR (file logging only)
+[0m12:41:18.094016 [debug] [MainThread]: Snowflake adapter: Setting botocore to ERROR (file logging only)
+[0m12:41:18.096015 [debug] [MainThread]: Snowflake adapter: Setting boto3 to ERROR (file logging only)
+[0m12:41:18.282908 [info ] [MainThread]: Using profiles dir at C:\Users\cecc001\Documents\MÁRCIO\dados-governo-brasil-v3\dbt
+[0m12:41:18.284913 [info ] [MainThread]: Using profiles.yml file at C:\Users\cecc001\Documents\MÁRCIO\dados-governo-brasil-v3\dbt\profiles.yml
+[0m12:41:18.286910 [info ] [MainThread]: Using dbt_project.yml file at C:\Users\cecc001\Documents\MÁRCIO\dados-governo-brasil-v3\dbt\dbt_project.yml
+[0m12:41:18.293902 [info ] [MainThread]: adapter type: snowflake
+[0m12:41:18.294901 [info ] [MainThread]: adapter version: 1.11.4
+[0m12:41:18.522770 [info ] [MainThread]: Configuration:
+[0m12:41:18.524778 [info ] [MainThread]:   profiles.yml file [[32mOK found and valid[0m]
+[0m12:41:18.526769 [info ] [MainThread]:   dbt_project.yml file [[32mOK found and valid[0m]
+[0m12:41:18.531765 [info ] [MainThread]: Required dependencies:
+[0m12:41:18.533766 [debug] [MainThread]: Executing "git --help"
+[0m12:41:18.608722 [debug] [MainThread]: STDOUT: "b"usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]\n           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]\n           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--no-lazy-fetch]\n           [--no-optional-locks] [--no-advice] [--bare] [--git-dir=<path>]\n           [--work-tree=<path>] [--namespace=<name>] [--config-env=<name>=<envvar>]\n           <command> [<args>]\n\nThese are common Git commands used in various situations:\n\nstart a working area (see also: git help tutorial)\n   clone      Clone a repository into a new directory\n   init       Create an empty Git repository or reinitialize an existing one\n\nwork on the current change (see also: git help everyday)\n   add        Add file contents to the index\n   mv         Move or rename a file, a directory, or a symlink\n   restore    Restore working tree files\n   rm         Remove files from the working tree and from the index\n\nexamine the history and state (see also: git help revisions)\n   bisect     Use binary search to find the commit that introduced a bug\n   diff       Show changes between commits, commit and working tree, etc\n   grep       Print lines matching a pattern\n   log        Show commit logs\n   show       Show various types of objects\n   status     Show the working tree status\n\ngrow, mark and tweak your common history\n   backfill   Download missing objects in a partial clone\n   branch     List, create, or delete branches\n   commit     Record changes to the repository\n   merge      Join two or more development histories together\n   rebase     Reapply commits on top of another base tip\n   reset      Set `HEAD` or the index to a known state\n   switch     Switch branches\n   tag        Create, list, delete or verify tags\n\ncollaborate (see also: git help workflows)\n   fetch      Download objects and refs from another repository\n   pull       Fetch from and integrate with another repository or a local branch\n   push       Update remote refs along with associated objects\n\n'git help -a' and 'git help -g' list available subcommands and some\nconcept guides. See 'git help <command>' or 'git help <concept>'\nto read about a specific subcommand or concept.\nSee 'git help git' for an overview of the system.\n""
+[0m12:41:18.609721 [debug] [MainThread]: STDERR: "b''"
+[0m12:41:18.610720 [info ] [MainThread]:  - git [[32mOK found[0m]
+
+[0m12:41:18.612722 [info ] [MainThread]: Connection:
+[0m12:41:18.618716 [info ] [MainThread]:   account: MKQAYBK-CK27934
+[0m12:41:18.620717 [info ] [MainThread]:   user: MARCIOMICHELOTTO
+[0m12:41:18.621714 [info ] [MainThread]:   database: GOV_V3
+[0m12:41:18.624713 [info ] [MainThread]:   warehouse: COMPUTE_WH
+[0m12:41:18.626712 [info ] [MainThread]:   role: ACCOUNTADMIN
+[0m12:41:18.632707 [info ] [MainThread]:   schema: dbt_mmichelotto
+[0m12:41:18.633707 [info ] [MainThread]:   authenticator: snowflake
+[0m12:41:18.635706 [info ] [MainThread]:   oauth_client_id: None
+[0m12:41:18.636705 [info ] [MainThread]:   query_tag: None
+[0m12:41:18.637704 [info ] [MainThread]:   client_session_keep_alive: False
+[0m12:41:18.641703 [info ] [MainThread]:   host: None
+[0m12:41:18.646701 [info ] [MainThread]:   port: None
+[0m12:41:18.648698 [info ] [MainThread]:   proxy_host: None
+[0m12:41:18.650697 [info ] [MainThread]:   proxy_port: None
+[0m12:41:18.651699 [info ] [MainThread]:   protocol: None
+[0m12:41:18.652697 [info ] [MainThread]:   connect_retries: 1
+[0m12:41:18.654697 [info ] [MainThread]:   connect_timeout: None
+[0m12:41:18.657696 [info ] [MainThread]:   retry_on_database_errors: False
+[0m12:41:18.662690 [info ] [MainThread]:   retry_all: False
+[0m12:41:18.664689 [info ] [MainThread]:   insecure_mode: False
+[0m12:41:18.666691 [info ] [MainThread]:   reuse_connections: True
+[0m12:41:18.667688 [info ] [MainThread]:   s3_stage_vpce_dns_name: None
+[0m12:41:18.668688 [info ] [MainThread]:   platform_detection_timeout_seconds: 0.0
+[0m12:41:18.672686 [info ] [MainThread]: Registered adapter: snowflake=1.11.4
+[0m12:41:19.245357 [debug] [MainThread]: Acquiring new snowflake connection 'debug'
+[0m12:41:19.411262 [debug] [MainThread]: Using snowflake connection "debug"
+[0m12:41:19.413261 [debug] [MainThread]: On debug: select 1 as id
+[0m12:41:19.414260 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m12:41:20.539617 [debug] [MainThread]: Snowflake adapter: Error running SQL: select 1 as id
+[0m12:41:20.540616 [debug] [MainThread]: Snowflake adapter: Rolling back transaction.
+[0m12:41:20.541616 [info ] [MainThread]:   Connection test: [[31mERROR[0m]
+
+[0m12:41:20.543616 [info ] [MainThread]: [31m1 check failed:[0m
+[0m12:41:20.546613 [info ] [MainThread]: dbt was unable to connect to the specified database.
+The database returned the following error:
+
+  >Database Error
+  250001 (08001): Failed to connect to DB: MKQAYBK-CK27934.snowflakecomputing.com:443. Incorrect username or password was specified.
+
+Check your database credentials and try again. For more information, visit:
+https://docs.getdbt.com/docs/configure-your-profile
+
+
+[0m12:41:20.552609 [debug] [MainThread]: Command `dbt debug` failed at 12:41:20.552609 after 3.56 seconds
+[0m12:41:20.554608 [debug] [MainThread]: Connection 'debug' was left open.
+[0m12:41:20.555608 [debug] [MainThread]: On debug: No close available on handle
+[0m12:41:20.556608 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002DBBD8D6F50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002DBBD8D6F10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002DBC55043D0>]}
+[0m12:41:20.558606 [debug] [MainThread]: Flushing usage events
+[0m12:41:21.606007 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m12:53:06.771397 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001BF569D4CD0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001BF569D4890>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001BF569D4550>]}
+
+
+============================== 12:53:06.779393 | 9c5fbe46-474f-42ca-94a8-fb92e898cf59 ==============================
+[0m12:53:06.779393 [info ] [MainThread]: Running with dbt=1.11.9
+[0m12:53:06.781392 [debug] [MainThread]: running dbt with arguments {'static_parser': 'True', 'no_print': 'None', 'version_check': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'printer_width': '80', 'write_json': 'True', 'empty': 'None', 'log_cache_events': 'False', 'introspect': 'True', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'profiles_dir': 'C:\\Users\\cecc001\\Documents\\MÁRCIO\\dados-governo-brasil-v3\\dbt', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'partial_parse': 'True', 'invocation_command': 'dbt debug', 'indirect_selection': 'eager', 'use_colors': 'True', 'use_experimental_parser': 'False', 'log_path': 'C:\\Users\\cecc001\\Documents\\MÁRCIO\\dados-governo-brasil-v3\\dbt\\logs'}
+[0m12:53:06.823368 [info ] [MainThread]: dbt version: 1.11.9
+[0m12:53:06.825368 [info ] [MainThread]: python version: 3.11.9
+[0m12:53:06.826366 [info ] [MainThread]: python path: C:\Users\cecc001\Documents\MÁRCIO\projeto-gov-V3\dbt-env\Scripts\python.exe
+[0m12:53:06.828365 [info ] [MainThread]: os info: Windows-10-10.0.19045-SP0
+[0m12:53:07.465001 [debug] [MainThread]: Snowflake adapter: Setting snowflake.connector to ERROR (file logging only)
+[0m12:53:07.466002 [debug] [MainThread]: Snowflake adapter: Setting botocore to ERROR (file logging only)
+[0m12:53:07.467000 [debug] [MainThread]: Snowflake adapter: Setting boto3 to ERROR (file logging only)
+[0m12:53:07.555949 [info ] [MainThread]: Using profiles dir at C:\Users\cecc001\Documents\MÁRCIO\dados-governo-brasil-v3\dbt
+[0m12:53:07.556949 [info ] [MainThread]: Using profiles.yml file at C:\Users\cecc001\Documents\MÁRCIO\dados-governo-brasil-v3\dbt\profiles.yml
+[0m12:53:07.557961 [info ] [MainThread]: Using dbt_project.yml file at C:\Users\cecc001\Documents\MÁRCIO\dados-governo-brasil-v3\dbt\dbt_project.yml
+[0m12:53:07.559947 [info ] [MainThread]: adapter type: snowflake
+[0m12:53:07.559947 [info ] [MainThread]: adapter version: 1.11.4
+[0m12:53:07.707862 [info ] [MainThread]: Configuration:
+[0m12:53:07.708860 [info ] [MainThread]:   profiles.yml file [[32mOK found and valid[0m]
+[0m12:53:07.709862 [info ] [MainThread]:   dbt_project.yml file [[32mOK found and valid[0m]
+[0m12:53:07.709862 [info ] [MainThread]: Required dependencies:
+[0m12:53:07.710861 [debug] [MainThread]: Executing "git --help"
+[0m12:53:07.754848 [debug] [MainThread]: STDOUT: "b"usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]\n           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]\n           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--no-lazy-fetch]\n           [--no-optional-locks] [--no-advice] [--bare] [--git-dir=<path>]\n           [--work-tree=<path>] [--namespace=<name>] [--config-env=<name>=<envvar>]\n           <command> [<args>]\n\nThese are common Git commands used in various situations:\n\nstart a working area (see also: git help tutorial)\n   clone      Clone a repository into a new directory\n   init       Create an empty Git repository or reinitialize an existing one\n\nwork on the current change (see also: git help everyday)\n   add        Add file contents to the index\n   mv         Move or rename a file, a directory, or a symlink\n   restore    Restore working tree files\n   rm         Remove files from the working tree and from the index\n\nexamine the history and state (see also: git help revisions)\n   bisect     Use binary search to find the commit that introduced a bug\n   diff       Show changes between commits, commit and working tree, etc\n   grep       Print lines matching a pattern\n   log        Show commit logs\n   show       Show various types of objects\n   status     Show the working tree status\n\ngrow, mark and tweak your common history\n   backfill   Download missing objects in a partial clone\n   branch     List, create, or delete branches\n   commit     Record changes to the repository\n   merge      Join two or more development histories together\n   rebase     Reapply commits on top of another base tip\n   reset      Set `HEAD` or the index to a known state\n   switch     Switch branches\n   tag        Create, list, delete or verify tags\n\ncollaborate (see also: git help workflows)\n   fetch      Download objects and refs from another repository\n   pull       Fetch from and integrate with another repository or a local branch\n   push       Update remote refs along with associated objects\n\n'git help -a' and 'git help -g' list available subcommands and some\nconcept guides. See 'git help <command>' or 'git help <concept>'\nto read about a specific subcommand or concept.\nSee 'git help git' for an overview of the system.\n""
+[0m12:53:07.755836 [debug] [MainThread]: STDERR: "b''"
+[0m12:53:07.755836 [info ] [MainThread]:  - git [[32mOK found[0m]
+
+[0m12:53:07.756847 [info ] [MainThread]: Connection:
+[0m12:53:07.757834 [info ] [MainThread]:   account: XRFLDVL-YCB69798
+[0m12:53:07.757834 [info ] [MainThread]:   user: MARCIOMICHELOTTO
+[0m12:53:07.758834 [info ] [MainThread]:   database: GOV_V3
+[0m12:53:07.759832 [info ] [MainThread]:   warehouse: COMPUTE_WH
+[0m12:53:07.759832 [info ] [MainThread]:   role: SYSADMIN
+[0m12:53:07.760832 [info ] [MainThread]:   schema: dbt_mmichelotto
+[0m12:53:07.761834 [info ] [MainThread]:   authenticator: snowflake
+[0m12:53:07.761834 [info ] [MainThread]:   oauth_client_id: None
+[0m12:53:07.762831 [info ] [MainThread]:   query_tag: None
+[0m12:53:07.763830 [info ] [MainThread]:   client_session_keep_alive: False
+[0m12:53:07.763830 [info ] [MainThread]:   host: None
+[0m12:53:07.764829 [info ] [MainThread]:   port: None
+[0m12:53:07.765829 [info ] [MainThread]:   proxy_host: None
+[0m12:53:07.770833 [info ] [MainThread]:   proxy_port: None
+[0m12:53:07.775824 [info ] [MainThread]:   protocol: None
+[0m12:53:07.776824 [info ] [MainThread]:   connect_retries: 1
+[0m12:53:07.777824 [info ] [MainThread]:   connect_timeout: None
+[0m12:53:07.778822 [info ] [MainThread]:   retry_on_database_errors: False
+[0m12:53:07.779823 [info ] [MainThread]:   retry_all: False
+[0m12:53:07.780821 [info ] [MainThread]:   insecure_mode: False
+[0m12:53:07.781821 [info ] [MainThread]:   reuse_connections: True
+[0m12:53:07.782820 [info ] [MainThread]:   s3_stage_vpce_dns_name: None
+[0m12:53:07.789816 [info ] [MainThread]:   platform_detection_timeout_seconds: 0.0
+[0m12:53:07.791814 [info ] [MainThread]: Registered adapter: snowflake=1.11.4
+[0m12:53:08.425451 [debug] [MainThread]: Acquiring new snowflake connection 'debug'
+[0m12:53:08.591357 [debug] [MainThread]: Using snowflake connection "debug"
+[0m12:53:08.592355 [debug] [MainThread]: On debug: select 1 as id
+[0m12:53:08.592355 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m12:53:11.892504 [debug] [MainThread]: SQL status: SUCCESS 1 in 3.300 seconds
+[0m12:53:11.898500 [info ] [MainThread]:   Connection test: [[32mOK connection ok[0m]
+
+[0m12:53:11.903464 [info ] [MainThread]: [32mAll checks passed![0m
+[0m12:53:11.916491 [debug] [MainThread]: Command `dbt debug` succeeded at 12:53:11.915492 after 5.36 seconds
+[0m12:53:11.921462 [debug] [MainThread]: Connection 'debug' was left open.
+[0m12:53:11.925466 [debug] [MainThread]: On debug: Close
+[0m12:53:12.434156 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001BF56909D50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001BF4FF33350>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001BF57A0AE50>]}
+[0m12:53:12.435156 [debug] [MainThread]: Flushing usage events
+[0m12:53:13.459579 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m12:57:59.365940 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000026E7E2EAD10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000026E7E0B2310>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000026E7E2EA4D0>]}
+
+
+============================== 12:57:59.373935 | b4846981-69e6-4868-9be2-211d0501eb48 ==============================
+[0m12:57:59.373935 [info ] [MainThread]: Running with dbt=1.11.9
+[0m12:57:59.375937 [debug] [MainThread]: running dbt with arguments {'version_check': 'True', 'no_print': 'None', 'static_parser': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'log_cache_events': 'False', 'empty': 'False', 'cache_selected_only': 'False', 'log_format': 'default', 'debug': 'False', 'fail_fast': 'False', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'profiles_dir': 'C:\\Users\\cecc001\\Documents\\MÁRCIO\\dados-governo-brasil-v3\\dbt', 'invocation_command': 'dbt run', 'use_colors': 'True', 'indirect_selection': 'eager', 'use_experimental_parser': 'False', 'log_path': 'C:\\Users\\cecc001\\Documents\\MÁRCIO\\dados-governo-brasil-v3\\dbt\\logs'}
+[0m12:57:59.951606 [debug] [MainThread]: Snowflake adapter: Setting snowflake.connector to ERROR (file logging only)
+[0m12:57:59.952606 [debug] [MainThread]: Snowflake adapter: Setting botocore to ERROR (file logging only)
+[0m12:57:59.952606 [debug] [MainThread]: Snowflake adapter: Setting boto3 to ERROR (file logging only)
+[0m12:58:00.345379 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': 'b4846981-69e6-4868-9be2-211d0501eb48', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000026E00168310>]}
+[0m12:58:00.474306 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': 'b4846981-69e6-4868-9be2-211d0501eb48', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000026E7D2C9FD0>]}
+[0m12:58:00.478303 [info ] [MainThread]: Registered adapter: snowflake=1.11.4
+[0m12:58:01.101945 [debug] [MainThread]: checksum: f8bb6a62265c70f2530bed05e52c2cee1c1844b101d398a67d5798350ab914c5, vars: {}, profile: , target: , version: 1.11.9
+[0m12:58:01.102945 [info ] [MainThread]: Unable to do partial parsing because saved manifest not found. Starting full parse.
+[0m12:58:01.103944 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'partial_parser', 'label': 'b4846981-69e6-4868-9be2-211d0501eb48', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000026E00371390>]}
+[0m12:58:05.150631 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': 'b4846981-69e6-4868-9be2-211d0501eb48', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000026E7DD4EC50>]}
+[0m12:58:05.405484 [debug] [MainThread]: Wrote artifact WritableManifest to C:\Users\cecc001\Documents\MÁRCIO\dados-governo-brasil-v3\dbt\target\manifest.json
+[0m12:58:05.416478 [debug] [MainThread]: Wrote artifact SemanticManifest to C:\Users\cecc001\Documents\MÁRCIO\dados-governo-brasil-v3\dbt\target\semantic_manifest.json
+[0m12:58:05.442462 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': 'b4846981-69e6-4868-9be2-211d0501eb48', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000026E0096AD90>]}
+[0m12:58:05.443462 [info ] [MainThread]: Found 4 models, 525 macros
+[0m12:58:05.444461 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'b4846981-69e6-4868-9be2-211d0501eb48', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000026E006C7010>]}
+[0m12:58:05.448462 [warn ] [MainThread]: Nothing to do. Try checking your model configs and model specification args
+[0m12:58:05.450462 [debug] [MainThread]: Command end result
+[0m12:58:05.514420 [debug] [MainThread]: Wrote artifact WritableManifest to C:\Users\cecc001\Documents\MÁRCIO\dados-governo-brasil-v3\dbt\target\manifest.json
+[0m12:58:05.519418 [debug] [MainThread]: Wrote artifact SemanticManifest to C:\Users\cecc001\Documents\MÁRCIO\dados-governo-brasil-v3\dbt\target\semantic_manifest.json
+[0m12:58:05.525415 [debug] [MainThread]: Wrote artifact RunExecutionResult to C:\Users\cecc001\Documents\MÁRCIO\dados-governo-brasil-v3\dbt\target\run_results.json
+[0m12:58:05.527414 [debug] [MainThread]: Command `dbt run` succeeded at 12:58:05.527414 after 6.36 seconds
+[0m12:58:05.529412 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000026E7E21DC10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000026E7771CB90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000026E77716310>]}
+[0m12:58:05.530412 [debug] [MainThread]: Flushing usage events
+[0m12:58:06.482868 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m13:00:48.587091 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001881F096010>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000018820098390>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000018820098050>]}
+
+
+============================== 13:00:48.592089 | a82f9cd2-93bd-4c38-a730-94f784526e1e ==============================
+[0m13:00:48.592089 [info ] [MainThread]: Running with dbt=1.11.9
+[0m13:00:48.594090 [debug] [MainThread]: running dbt with arguments {'version_check': 'True', 'no_print': 'None', 'static_parser': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'printer_width': '80', 'write_json': 'True', 'empty': 'None', 'log_cache_events': 'False', 'introspect': 'True', 'cache_selected_only': 'False', 'log_format': 'default', 'debug': 'False', 'fail_fast': 'False', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'profiles_dir': 'C:\\Users\\cecc001\\Documents\\MÁRCIO\\dados-governo-brasil-v3\\dbt', 'use_colors': 'True', 'indirect_selection': 'eager', 'invocation_command': 'dbt list', 'use_experimental_parser': 'False', 'log_path': 'C:\\Users\\cecc001\\Documents\\MÁRCIO\\dados-governo-brasil-v3\\dbt\\logs'}
+[0m13:00:49.193745 [debug] [MainThread]: Snowflake adapter: Setting snowflake.connector to ERROR (file logging only)
+[0m13:00:49.194745 [debug] [MainThread]: Snowflake adapter: Setting botocore to ERROR (file logging only)
+[0m13:00:49.195743 [debug] [MainThread]: Snowflake adapter: Setting boto3 to ERROR (file logging only)
+[0m13:00:49.663476 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': 'a82f9cd2-93bd-4c38-a730-94f784526e1e', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000018820FFD110>]}
+[0m13:00:49.779407 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': 'a82f9cd2-93bd-4c38-a730-94f784526e1e', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000188210CE450>]}
+[0m13:00:49.781407 [info ] [MainThread]: Registered adapter: snowflake=1.11.4
+[0m13:00:50.245141 [debug] [MainThread]: checksum: f8bb6a62265c70f2530bed05e52c2cee1c1844b101d398a67d5798350ab914c5, vars: {}, profile: , target: , version: 1.11.9
+[0m13:00:50.411048 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 0 files changed.
+[0m13:00:50.412046 [debug] [MainThread]: Nothing changed, skipping partial parsing.
+[0m13:00:50.412046 [debug] [MainThread]: Partial parsing enabled, no changes found, skipping parsing
+[0m13:00:50.451023 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': 'a82f9cd2-93bd-4c38-a730-94f784526e1e', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000188213C4050>]}
+[0m13:00:50.606936 [debug] [MainThread]: Wrote artifact WritableManifest to C:\Users\cecc001\Documents\MÁRCIO\dados-governo-brasil-v3\dbt\target\manifest.json
+[0m13:00:50.612932 [debug] [MainThread]: Wrote artifact SemanticManifest to C:\Users\cecc001\Documents\MÁRCIO\dados-governo-brasil-v3\dbt\target\semantic_manifest.json
+[0m13:00:50.656907 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'a82f9cd2-93bd-4c38-a730-94f784526e1e', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000188200AB5D0>]}
+[0m13:00:50.658906 [info ] [MainThread]: dados_governo_brasil.gold.vw_alertas_criticos
+[0m13:00:50.661905 [info ] [MainThread]: dados_governo_brasil.gold.vw_execucao_orcamentaria
+[0m13:00:50.667901 [info ] [MainThread]: dados_governo_brasil.gold.vw_ranking_ministerios
+[0m13:00:50.669900 [info ] [MainThread]: dados_governo_brasil.gold.vw_restos_a_pagar
+[0m13:00:50.672898 [debug] [MainThread]: Command `dbt list` succeeded at 13:00:50.672898 after 2.20 seconds
+[0m13:00:50.674897 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001881854B610>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000018818553350>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000188184C6310>]}
+[0m13:00:50.675897 [debug] [MainThread]: Flushing usage events
+[0m13:00:51.606364 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m13:07:50.740178 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B59CEF8290>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B59DEFD090>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B59DF234D0>]}
+
+
+============================== 13:07:50.745175 | 336fd545-cce8-41ac-845f-c66fbea67f12 ==============================
+[0m13:07:50.745175 [info ] [MainThread]: Running with dbt=1.11.9
+[0m13:07:50.746174 [debug] [MainThread]: running dbt with arguments {'static_parser': 'True', 'no_print': 'None', 'version_check': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'printer_width': '80', 'write_json': 'True', 'empty': 'None', 'log_cache_events': 'False', 'introspect': 'True', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'profiles_dir': 'C:\\Users\\cecc001\\Documents\\MÁRCIO\\dados-governo-brasil-v3\\dbt', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'partial_parse': 'True', 'invocation_command': "dbt run-operation query_data --args {sql: 'SHOW TABLES IN DATABASE GOV_V3'}", 'indirect_selection': 'eager', 'use_colors': 'True', 'use_experimental_parser': 'False', 'log_path': 'C:\\Users\\cecc001\\Documents\\MÁRCIO\\dados-governo-brasil-v3\\dbt\\logs'}
+[0m13:07:51.289864 [debug] [MainThread]: Snowflake adapter: Setting snowflake.connector to ERROR (file logging only)
+[0m13:07:51.290864 [debug] [MainThread]: Snowflake adapter: Setting botocore to ERROR (file logging only)
+[0m13:07:51.290864 [debug] [MainThread]: Snowflake adapter: Setting boto3 to ERROR (file logging only)
+[0m13:07:51.706624 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '336fd545-cce8-41ac-845f-c66fbea67f12', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B59EE04410>]}
+[0m13:07:51.918504 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '336fd545-cce8-41ac-845f-c66fbea67f12', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B59DF0C250>]}
+[0m13:07:51.921502 [info ] [MainThread]: Registered adapter: snowflake=1.11.4
+[0m13:07:52.450211 [debug] [MainThread]: checksum: f8bb6a62265c70f2530bed05e52c2cee1c1844b101d398a67d5798350ab914c5, vars: {}, profile: , target: , version: 1.11.9
+[0m13:07:52.606110 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 0 files changed.
+[0m13:07:52.607108 [debug] [MainThread]: Nothing changed, skipping partial parsing.
+[0m13:07:52.607108 [debug] [MainThread]: Partial parsing enabled, no changes found, skipping parsing
+[0m13:07:52.647099 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '336fd545-cce8-41ac-845f-c66fbea67f12', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B59F26A490>]}
+[0m13:07:52.753024 [debug] [MainThread]: Wrote artifact WritableManifest to C:\Users\cecc001\Documents\MÁRCIO\dados-governo-brasil-v3\dbt\target\manifest.json
+[0m13:07:52.756025 [debug] [MainThread]: Wrote artifact SemanticManifest to C:\Users\cecc001\Documents\MÁRCIO\dados-governo-brasil-v3\dbt\target\semantic_manifest.json
+[0m13:07:52.784007 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '336fd545-cce8-41ac-845f-c66fbea67f12', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B59F1CA910>]}
+[0m13:07:52.785008 [info ] [MainThread]: Found 4 models, 525 macros
+[0m13:07:52.786006 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '336fd545-cce8-41ac-845f-c66fbea67f12', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B59EED8B50>]}
+[0m13:07:52.787005 [debug] [MainThread]: Acquiring new snowflake connection 'macro_query_data'
+[0m13:07:52.788007 [error] [MainThread]: Encountered an error while running operation: Runtime Error
+  dbt could not find a macro with the name "query_data" in any package
+[0m13:07:52.790005 [debug] [MainThread]: Traceback (most recent call last):
+  File "C:\Users\cecc001\Documents\MÁRCIO\projeto-gov-V3\dbt-env\Lib\site-packages\dbt\task\run_operation.py", line 64, in run
+    self._run_unsafe(package_name, macro_name)
+  File "C:\Users\cecc001\Documents\MÁRCIO\projeto-gov-V3\dbt-env\Lib\site-packages\dbt\task\run_operation.py", line 45, in _run_unsafe
+    res = adapter.execute_macro(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cecc001\Documents\MÁRCIO\projeto-gov-V3\dbt-env\Lib\site-packages\dbt\adapters\base\impl.py", line 1304, in execute_macro
+    raise DbtRuntimeError(
+dbt_common.exceptions.base.DbtRuntimeError: Runtime Error
+  dbt could not find a macro with the name "query_data" in any package
+
+[0m13:07:52.791005 [error] [MainThread]: Encountered an error:
+Compilation Error
+  dbt could not find a macro with the name 'query_data' in any package. This can happen when calling a macro that does not exist. Check for typos and/or install package dependencies with "dbt deps".
+[0m13:07:52.792004 [debug] [MainThread]: Command `dbt run-operation` failed at 13:07:52.792004 after 2.16 seconds
+[0m13:07:52.793004 [debug] [MainThread]: Connection 'macro_query_data' was properly closed.
+[0m13:07:52.793004 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B59DF57A10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B59DF57ED0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001B59DF23A90>]}
+[0m13:07:52.794004 [debug] [MainThread]: Flushing usage events
+[0m13:07:53.876391 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m13:48:11.870515 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001C4B872AB50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001C4B8729B90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001C4B8729F10>]}
+
+
+============================== 13:48:11.879511 | bdf37e10-42e0-49f8-81c2-939c39191dd9 ==============================
+[0m13:48:11.879511 [info ] [MainThread]: Running with dbt=1.11.9
+[0m13:48:11.881509 [debug] [MainThread]: running dbt with arguments {'version_check': 'True', 'no_print': 'None', 'static_parser': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'printer_width': '80', 'write_json': 'True', 'empty': 'False', 'log_cache_events': 'False', 'introspect': 'True', 'cache_selected_only': 'False', 'log_format': 'default', 'debug': 'False', 'fail_fast': 'False', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'profiles_dir': 'C:\\Users\\cecc001\\Documents\\MÁRCIO\\dados-governo-brasil-v3\\dbt', 'invocation_command': 'dbt run', 'use_colors': 'True', 'indirect_selection': 'eager', 'use_experimental_parser': 'False', 'log_path': 'C:\\Users\\cecc001\\Documents\\MÁRCIO\\dados-governo-brasil-v3\\dbt\\logs'}
+[0m13:48:12.663062 [debug] [MainThread]: Snowflake adapter: Setting snowflake.connector to ERROR (file logging only)
+[0m13:48:12.664063 [debug] [MainThread]: Snowflake adapter: Setting botocore to ERROR (file logging only)
+[0m13:48:12.664063 [debug] [MainThread]: Snowflake adapter: Setting boto3 to ERROR (file logging only)
+[0m13:48:12.949897 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': 'bdf37e10-42e0-49f8-81c2-939c39191dd9', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001C4B9790750>]}
+[0m13:48:13.055836 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': 'bdf37e10-42e0-49f8-81c2-939c39191dd9', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001C4B97A0490>]}
+[0m13:48:13.058835 [info ] [MainThread]: Registered adapter: snowflake=1.11.4
+[0m13:48:13.660490 [debug] [MainThread]: checksum: f8bb6a62265c70f2530bed05e52c2cee1c1844b101d398a67d5798350ab914c5, vars: {}, profile: , target: , version: 1.11.9
+[0m13:48:13.821397 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 0 files changed.
+[0m13:48:13.822397 [debug] [MainThread]: Nothing changed, skipping partial parsing.
+[0m13:48:13.823396 [debug] [MainThread]: Partial parsing enabled, no changes found, skipping parsing
+[0m13:48:13.861376 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': 'bdf37e10-42e0-49f8-81c2-939c39191dd9', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001C4BAB05410>]}
+[0m13:48:13.965315 [debug] [MainThread]: Wrote artifact WritableManifest to C:\Users\cecc001\Documents\MÁRCIO\dados-governo-brasil-v3\dbt\target\manifest.json
+[0m13:48:13.970314 [debug] [MainThread]: Wrote artifact SemanticManifest to C:\Users\cecc001\Documents\MÁRCIO\dados-governo-brasil-v3\dbt\target\semantic_manifest.json
+[0m13:48:13.987305 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': 'bdf37e10-42e0-49f8-81c2-939c39191dd9', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001C4BAA082D0>]}
+[0m13:48:13.988304 [info ] [MainThread]: Found 4 models, 525 macros
+[0m13:48:13.989303 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'bdf37e10-42e0-49f8-81c2-939c39191dd9', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001C4B872BF90>]}
+[0m13:48:13.991302 [warn ] [MainThread]: Nothing to do. Try checking your model configs and model specification args
+[0m13:48:13.994300 [debug] [MainThread]: Command end result
+[0m13:48:14.045271 [debug] [MainThread]: Wrote artifact WritableManifest to C:\Users\cecc001\Documents\MÁRCIO\dados-governo-brasil-v3\dbt\target\manifest.json
+[0m13:48:14.049268 [debug] [MainThread]: Wrote artifact SemanticManifest to C:\Users\cecc001\Documents\MÁRCIO\dados-governo-brasil-v3\dbt\target\semantic_manifest.json
+[0m13:48:14.054266 [debug] [MainThread]: Wrote artifact RunExecutionResult to C:\Users\cecc001\Documents\MÁRCIO\dados-governo-brasil-v3\dbt\target\run_results.json
+[0m13:48:14.056264 [debug] [MainThread]: Command `dbt run` succeeded at 13:48:14.055266 after 2.41 seconds
+[0m13:48:14.056264 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001C4B84CAB50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001C4B1CB3350>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001C4B97EDA90>]}
+[0m13:48:14.057263 [debug] [MainThread]: Flushing usage events
+[0m13:48:15.332543 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m13:52:50.944795 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000292E86B9F10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000292E86B8710>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000292E86B9450>]}
+
+
+============================== 13:52:50.949792 | 2da6d064-b765-4bab-a455-3c379aae11be ==============================
+[0m13:52:50.949792 [info ] [MainThread]: Running with dbt=1.11.9
+[0m13:52:50.950792 [debug] [MainThread]: running dbt with arguments {'version_check': 'True', 'no_print': 'None', 'static_parser': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'log_cache_events': 'False', 'empty': 'False', 'cache_selected_only': 'False', 'log_format': 'default', 'debug': 'False', 'fail_fast': 'False', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'profiles_dir': 'C:\\Users\\cecc001\\Documents\\MÁRCIO\\dados-governo-brasil-v3\\dbt', 'indirect_selection': 'eager', 'use_colors': 'True', 'invocation_command': 'dbt run --models gold', 'use_experimental_parser': 'False', 'log_path': 'C:\\Users\\cecc001\\Documents\\MÁRCIO\\dados-governo-brasil-v3\\dbt\\logs'}
+[0m13:52:50.951791 [warn ] [MainThread]: [[33mWARNING[0m]: Deprecated functionality
+Usage of `--models`, `--model`, and `-m` is deprecated in favor of `--select` or
+`-s`.
+[0m13:52:50.953789 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'deprecation', 'label': '2da6d064-b765-4bab-a455-3c379aae11be', 'property_': 'warn', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000292E86B9C50>]}
+[0m13:52:51.695366 [debug] [MainThread]: Snowflake adapter: Setting snowflake.connector to ERROR (file logging only)
+[0m13:52:51.697364 [debug] [MainThread]: Snowflake adapter: Setting botocore to ERROR (file logging only)
+[0m13:52:51.699364 [debug] [MainThread]: Snowflake adapter: Setting boto3 to ERROR (file logging only)
+[0m13:52:52.109127 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '2da6d064-b765-4bab-a455-3c379aae11be', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000292E845A190>]}
+[0m13:52:52.199079 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '2da6d064-b765-4bab-a455-3c379aae11be', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000292E97302D0>]}
+[0m13:52:52.201076 [info ] [MainThread]: Registered adapter: snowflake=1.11.4
+[0m13:52:52.717780 [debug] [MainThread]: checksum: f8bb6a62265c70f2530bed05e52c2cee1c1844b101d398a67d5798350ab914c5, vars: {}, profile: , target: , version: 1.11.9
+[0m13:52:52.900676 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 0 files changed.
+[0m13:52:52.901675 [debug] [MainThread]: Nothing changed, skipping partial parsing.
+[0m13:52:52.902675 [debug] [MainThread]: Partial parsing enabled, no changes found, skipping parsing
+[0m13:52:52.954645 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '2da6d064-b765-4bab-a455-3c379aae11be', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000292EAAC79D0>]}
+[0m13:52:53.158529 [debug] [MainThread]: Wrote artifact WritableManifest to C:\Users\cecc001\Documents\MÁRCIO\dados-governo-brasil-v3\dbt\target\manifest.json
+[0m13:52:53.170522 [debug] [MainThread]: Wrote artifact SemanticManifest to C:\Users\cecc001\Documents\MÁRCIO\dados-governo-brasil-v3\dbt\target\semantic_manifest.json
+[0m13:52:53.203503 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '2da6d064-b765-4bab-a455-3c379aae11be', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000292EA999C10>]}
+[0m13:52:53.204502 [info ] [MainThread]: Found 4 models, 525 macros
+[0m13:52:53.206500 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '2da6d064-b765-4bab-a455-3c379aae11be', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000292EA9B3E90>]}
+[0m13:52:53.208500 [warn ] [MainThread]: Nothing to do. Try checking your model configs and model specification args
+[0m13:52:53.212498 [debug] [MainThread]: Command end result
+[0m13:52:53.308442 [debug] [MainThread]: Wrote artifact WritableManifest to C:\Users\cecc001\Documents\MÁRCIO\dados-governo-brasil-v3\dbt\target\manifest.json
+[0m13:52:53.313439 [debug] [MainThread]: Wrote artifact SemanticManifest to C:\Users\cecc001\Documents\MÁRCIO\dados-governo-brasil-v3\dbt\target\semantic_manifest.json
+[0m13:52:53.318435 [debug] [MainThread]: Wrote artifact RunExecutionResult to C:\Users\cecc001\Documents\MÁRCIO\dados-governo-brasil-v3\dbt\target\run_results.json
+[0m13:52:53.319437 [warn ] [MainThread]: [[33mWARNING[0m][DeprecationsSummary]: Deprecated functionality
+Summary of encountered deprecations:
+- ModelParamUsageDeprecation: 1 occurrence
+To see all deprecation instances instead of just the first occurrence of each,
+run command again with the `--show-all-deprecations` flag. You may also need to
+run with `--no-partial-parse` as some deprecations are only encountered during
+parsing.
+[0m13:52:53.321435 [debug] [MainThread]: Command `dbt run` succeeded at 13:52:53.321435 after 2.48 seconds
+[0m13:52:53.322434 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000292E1BDB690>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000292E85EDB90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000292E1B56310>]}
+[0m13:52:53.323433 [debug] [MainThread]: Flushing usage events
+[0m13:52:59.413949 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m13:57:06.843352 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002A50E824650>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002A50E5CAA50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002A50F890310>]}
+
+
+============================== 13:57:06.848349 | d8d2b53b-4768-46c1-a163-5be8bfc0b3af ==============================
+[0m13:57:06.848349 [info ] [MainThread]: Running with dbt=1.11.9
+[0m13:57:06.849349 [debug] [MainThread]: running dbt with arguments {'static_parser': 'True', 'no_print': 'None', 'version_check': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'log_cache_events': 'False', 'empty': 'False', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'profiles_dir': 'C:\\Users\\cecc001\\Documents\\MÁRCIO\\dados-governo-brasil-v3\\dbt', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'partial_parse': 'True', 'use_colors': 'True', 'indirect_selection': 'eager', 'invocation_command': 'dbt run --select gold', 'use_experimental_parser': 'False', 'log_path': 'C:\\Users\\cecc001\\Documents\\MÁRCIO\\dados-governo-brasil-v3\\dbt\\logs'}
+[0m13:57:07.475976 [debug] [MainThread]: Snowflake adapter: Setting snowflake.connector to ERROR (file logging only)
+[0m13:57:07.476976 [debug] [MainThread]: Snowflake adapter: Setting botocore to ERROR (file logging only)
+[0m13:57:07.477977 [debug] [MainThread]: Snowflake adapter: Setting boto3 to ERROR (file logging only)
+[0m13:57:07.994680 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': 'd8d2b53b-4768-46c1-a163-5be8bfc0b3af', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002A5107CD350>]}
+[0m13:57:08.117609 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': 'd8d2b53b-4768-46c1-a163-5be8bfc0b3af', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002A50D7FE1D0>]}
+[0m13:57:08.119608 [info ] [MainThread]: Registered adapter: snowflake=1.11.4
+[0m13:57:08.633315 [debug] [MainThread]: checksum: f8bb6a62265c70f2530bed05e52c2cee1c1844b101d398a67d5798350ab914c5, vars: {}, profile: , target: , version: 1.11.9
+[0m13:57:08.854189 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 0 files changed.
+[0m13:57:08.854189 [debug] [MainThread]: Nothing changed, skipping partial parsing.
+[0m13:57:08.855188 [debug] [MainThread]: Partial parsing enabled, no changes found, skipping parsing
+[0m13:57:08.905159 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': 'd8d2b53b-4768-46c1-a163-5be8bfc0b3af', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002A510C050D0>]}
+[0m13:57:09.038082 [debug] [MainThread]: Wrote artifact WritableManifest to C:\Users\cecc001\Documents\MÁRCIO\dados-governo-brasil-v3\dbt\target\manifest.json
+[0m13:57:09.043080 [debug] [MainThread]: Wrote artifact SemanticManifest to C:\Users\cecc001\Documents\MÁRCIO\dados-governo-brasil-v3\dbt\target\semantic_manifest.json
+[0m13:57:09.068067 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': 'd8d2b53b-4768-46c1-a163-5be8bfc0b3af', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002A510B0C1D0>]}
+[0m13:57:09.069066 [info ] [MainThread]: Found 4 models, 525 macros
+[0m13:57:09.071064 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'd8d2b53b-4768-46c1-a163-5be8bfc0b3af', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002A50E827E10>]}
+[0m13:57:09.074062 [warn ] [MainThread]: Nothing to do. Try checking your model configs and model specification args
+[0m13:57:09.080060 [debug] [MainThread]: Command end result
+[0m13:57:09.172006 [debug] [MainThread]: Wrote artifact WritableManifest to C:\Users\cecc001\Documents\MÁRCIO\dados-governo-brasil-v3\dbt\target\manifest.json
+[0m13:57:09.177004 [debug] [MainThread]: Wrote artifact SemanticManifest to C:\Users\cecc001\Documents\MÁRCIO\dados-governo-brasil-v3\dbt\target\semantic_manifest.json
+[0m13:57:09.184998 [debug] [MainThread]: Wrote artifact RunExecutionResult to C:\Users\cecc001\Documents\MÁRCIO\dados-governo-brasil-v3\dbt\target\run_results.json
+[0m13:57:09.187998 [debug] [MainThread]: Command `dbt run` succeeded at 13:57:09.187998 after 2.45 seconds
+[0m13:57:09.188998 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002A50A23AC90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002A50E5CA650>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002A507A15F90>]}
+[0m13:57:09.190996 [debug] [MainThread]: Flushing usage events
+[0m13:57:10.284371 [debug] [MainThread]: An error was encountered while trying to flush usage events

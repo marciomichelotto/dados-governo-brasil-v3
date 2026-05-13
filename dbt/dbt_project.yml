@@ -1,0 +1,27 @@
+# Nome do projeto (obrigatório)
+name: 'dados_governo_brasil'
+
+# Configurações do projeto
+version: '1.0.0'
+config-version: 2
+
+# Perfil referenciado no profiles.yml
+profile: 'gov_v3'
+
+# Diretórios do projeto
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+# Configurações de modelos
+models:
+  dados_governo_brasil:
+    # Configurações específicas podem ser adicionadas aqui
+    +materialized: table

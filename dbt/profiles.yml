@@ -1,0 +1,14 @@
+gov_v3:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: XRFLDVL-YCB69798
+      user: MARCIOMICHELOTTO
+      authenticator: snowflake
+      password: DataEngGuy2727**
+      role: SYSADMIN
+      database: GOV_V3
+      warehouse: COMPUTE_WH
+      schema: dbt_mmichelotto
+      threads: 4

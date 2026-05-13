@@ -1,0 +1,350 @@
+# =============================================================================
+# schema.yml  |  Documentação + Testes de Qualidade — dbt
+# Projeto     : dados-governo-brasil-v3
+# Camada      : Gold (modelos analíticos)
+# Autor       : Marcio Michelotto
+#
+# POR QUE ISSO IMPORTA?
+#   Dados do Portal da Transparência mudam formato sem aviso.
+#   Sem testes, o pipeline silencia erros — você só descobre
+#   que o ranking está errado quando alguém questiona numa reunião.
+#
+# COMO RODAR:
+#   dbt test                        → todos os testes
+#   dbt test --select gold          → só camada Gold
+#   dbt test --select vw_ranking_ministerios  → modelo específico
+#   dbt docs generate && dbt docs serve       → documentação navegável
+# =============================================================================
+
+version: 2
+
+# -----------------------------------------------------------------------------
+# SOURCES — declara TB_SILVER_DESPESAS como fonte oficial
+# Isso cria a linhagem correta no dbt: Silver → Gold (visível no dbt docs)
+# Sem isso, os modelos Gold referenciam a Silver como tabela avulsa,
+# quebrando o lineage graph e dificultando auditoria.
+# -----------------------------------------------------------------------------
+sources:
+  - name: silver
+    database: DADOS_GOVERNO          # ajuste se o database tiver outro nome
+    schema: SILVER
+    description: >
+      Camada Silver do pipeline de despesas públicas.
+      Dados limpos, tipados e padronizados a partir da Bronze.
+      Fonte primária para todos os modelos analíticos Gold.
+
+    tables:
+      - name: TB_SILVER_DESPESAS
+        description: >
+          Despesas públicas por órgão subordinado e competência mensal.
+          Originadas do Portal da Transparência (despesasPorOrgao.csv).
+          Chave de negócio: orgao_subordinado_cod + mes_ano_dt.
+
+        # Freshness: alerta se Silver ficar mais de 25h sem atualizar
+        # (o pipeline roda diariamente via Snowflake Task)
+        freshness:
+          warn_after: {count: 25, period: hour}
+          error_after: {count: 49, period: hour}
+        loaded_at_field: dt_carga_silver
+
+        columns:
+          - name: orgao_subordinado_cod
+            description: Código do órgão subordinado (chave natural)
+            tests:
+              - not_null
+
+          - name: mes_ano_dt
+            description: Primeiro dia do mês de competência (DATE)
+            tests:
+              - not_null
+
+          - name: orgao_superior
+            description: Nome do ministério / órgão superior
+            tests:
+              - not_null
+
+          - name: valor_pago
+            description: Valor efetivamente pago no mês (R$)
+            tests:
+              - not_null
+              - dbt_utils.expression_is_true:
+                  expression: ">= 0"
+                  name: silver_valor_pago_nao_negativo
+
+          - name: valor_empenhado
+            description: Valor empenhado no mês (R$)
+            tests:
+              - dbt_utils.expression_is_true:
+                  expression: ">= 0"
+                  name: silver_valor_empenhado_nao_negativo
+
+          - name: dt_carga_silver
+            description: Timestamp de quando o registro foi carregado na Silver
+            tests:
+              - not_null
+
+
+# -----------------------------------------------------------------------------
+# MODELS — modelos Gold e seus testes
+# -----------------------------------------------------------------------------
+models:
+
+  # ---------------------------------------------------------------------------
+  # vw_ranking_ministerios
+  # Ranking de ministérios por volume de pagamentos no período
+  # ---------------------------------------------------------------------------
+  - name: vw_ranking_ministerios
+    description: >
+      Ranking de ministérios ordenado por total pago no período analisado.
+      Alimenta o dashboard executivo e o relatório de transparência fiscal.
+      Granularidade: um registro por orgao_superior por mes_ano_dt.
+
+    config:
+      materialized: view        # view porque é leve e sempre atual
+      schema: gold
+
+    columns:
+      - name: orgao_superior
+        description: Nome do ministério / órgão superior
+        tests:
+          - not_null
+          - relationships:         # garante integridade referencial com Silver
+              to: source('silver', 'TB_SILVER_DESPESAS')
+              field: orgao_superior
+              name: ranking_orgao_existe_na_silver
+
+      - name: mes_ano_dt
+        description: Competência mensal
+        tests:
+          - not_null
+
+      - name: total_pago
+        description: Soma dos valores pagos no período (R$)
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+              name: ranking_total_pago_nao_negativo
+
+      - name: total_empenhado
+        description: Soma dos valores empenhados no período (R$)
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+              name: ranking_total_empenhado_nao_negativo
+
+      - name: taxa_execucao_pct
+        description: >
+          Percentual de execução orçamentária: (total_pago / total_empenhado) * 100.
+          Valores entre 0 e 100 indicam execução normal.
+          Valores acima de 100 podem indicar suplementações — monitorar.
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+              name: ranking_taxa_execucao_nao_negativa
+
+      - name: posicao_ranking
+        description: Posição no ranking (1 = maior pagador do período)
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 1"
+              name: ranking_posicao_valida
+
+
+  # ---------------------------------------------------------------------------
+  # vw_restos_a_pagar
+  # Órgãos com maior volume de restos a pagar inscritos
+  # ---------------------------------------------------------------------------
+  - name: vw_restos_a_pagar
+    description: >
+      Análise de restos a pagar por órgão e competência.
+      Restos a pagar representam despesas empenhadas mas não pagas no exercício —
+      um indicador crítico de saúde fiscal do órgão.
+      Alertas gerados quando proporcao_restos_pct > 30%.
+
+    config:
+      materialized: view
+      schema: gold
+
+    columns:
+      - name: orgao_superior
+        description: Nome do ministério / órgão superior
+        tests:
+          - not_null
+
+      - name: mes_ano_dt
+        description: Competência mensal
+        tests:
+          - not_null
+
+      - name: total_restos_inscritos
+        description: Total de restos a pagar inscritos no período (R$)
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+              name: restos_inscritos_nao_negativo
+
+      - name: total_restos_pagos
+        description: Total de restos a pagar efetivamente pagos (R$)
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+              name: restos_pagos_nao_negativo
+
+      - name: proporcao_restos_pct
+        description: >
+          Proporção de restos inscritos sobre o total pago (%).
+          Acima de 30% é considerado alerta crítico neste projeto.
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+              name: restos_proporcao_nao_negativa
+
+      - name: flag_alerta_restos
+        description: >
+          'CRITICO' quando proporcao_restos_pct > 30%, 'NORMAL' caso contrário.
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['CRITICO', 'NORMAL', 'SEM_DADOS']
+              name: restos_flag_valores_validos
+
+
+  # ---------------------------------------------------------------------------
+  # vw_execucao_orcamentaria
+  # Eficiência de execução orçamentária por órgão e período
+  # ---------------------------------------------------------------------------
+  - name: vw_execucao_orcamentaria
+    description: >
+      Classificação de eficiência orçamentária por ministério.
+      Combina taxa de execução (pago/empenhado) com análise de restos a pagar
+      para produzir um score de eficiência comparável entre órgãos.
+
+    config:
+      materialized: view
+      schema: gold
+
+    columns:
+      - name: orgao_superior
+        description: Nome do ministério
+        tests:
+          - not_null
+
+      - name: mes_ano_dt
+        description: Competência mensal
+        tests:
+          - not_null
+
+      - name: total_empenhado
+        description: Total empenhado no período (R$)
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+              name: exec_empenhado_nao_negativo
+
+      - name: total_liquidado
+        description: Total liquidado no período (R$)
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+              name: exec_liquidado_nao_negativo
+
+      - name: total_pago
+        description: Total pago no período (R$)
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+              name: exec_pago_nao_negativo
+
+      - name: classificacao_eficiencia
+        description: >
+          Classificação qualitativa da execução:
+          ALTA (>= 80%), MEDIA (50-79%), BAIXA (< 50%), SEM_DADOS.
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['ALTA', 'MEDIA', 'BAIXA', 'SEM_DADOS']
+              name: exec_classificacao_valores_validos
+
+
+  # ---------------------------------------------------------------------------
+  # vw_alertas_criticos
+  # Alertas automáticos: combinação de baixa execução + alto restos a pagar
+  # ---------------------------------------------------------------------------
+  - name: vw_alertas_criticos
+    description: >
+      Alertas críticos gerados automaticamente para órgãos que combinam
+      baixa execução orçamentária (< 50%) com alto volume de restos a pagar (> 30%).
+      Esse cruzamento indica risco fiscal elevado e merece atenção prioritária.
+      Atualizado a cada execução do pipeline (via Snowflake Task).
+
+    config:
+      materialized: view
+      schema: gold
+
+    columns:
+      - name: orgao_superior
+        description: Nome do ministério em alerta
+        tests:
+          - not_null
+
+      - name: mes_ano_dt
+        description: Competência do alerta
+        tests:
+          - not_null
+
+      - name: motivo_alerta
+        description: Descrição do motivo que gerou o alerta
+        tests:
+          - not_null
+
+      - name: nivel_criticidade
+        description: Nível de criticidade do alerta
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['CRITICO', 'ALTO', 'MEDIO']
+              name: alertas_nivel_criticidade_valido
+
+      - name: taxa_execucao_pct
+        description: Taxa de execução orçamentária no momento do alerta (%)
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+              name: alertas_taxa_execucao_nao_negativa
+
+      - name: proporcao_restos_pct
+        description: Proporção de restos a pagar no momento do alerta (%)
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+              name: alertas_proporcao_restos_nao_negativa
+
+
+# =============================================================================
+# PRÓXIMOS PASSOS (quando o Snowflake estiver disponível)
+# =============================================================================
+#
+# 1. Instalar dbt-utils (necessário para expression_is_true):
+#    pip install dbt-utils
+#    Adicionar ao packages.yml:
+#      packages:
+#        - package: dbt-labs/dbt_utils
+#          version: [">=1.0.0", "<2.0.0"]
+#    Rodar: dbt deps
+#
+# 2. Executar testes:
+#    dbt test --select gold
+#
+# 3. Gerar documentação navegável:
+#    dbt docs generate
+#    dbt docs serve
+#    Acesse: http://localhost:8080
+#
+# 4. Ver o lineage graph (Silver → Gold) no navegador — é o que impressiona
+#    recrutadores técnicos quando você compartilha um print no LinkedIn.
+# =============================================================================
