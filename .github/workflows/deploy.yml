@@ -136,13 +136,13 @@ jobs:
       #    indentação inconsistente, palavras reservadas em minúsculo, etc.
       # -----------------------------------------------------------------------
       #- name: SQL Lint (sqlfluff)
-        run: |
-          sqlfluff lint snowflake/ \
-            --dialect snowflake \
-            --exclude-rules L034,L031,CP02,LT02,LT01 \
-            --format github-annotation \
-            --annotation-level warning
-        continue-on-error: true   # não quebra o build por style, só por erros graves
+        #run: |
+          #sqlfluff lint snowflake/ \
+            #--dialect snowflake \
+            #--exclude-rules L034,L031,CP02,LT02,LT01 \
+            #--format github-annotation \
+            #--annotation-level warning
+        #continue-on-error: true   # não quebra o build por style, só por erros graves
         # Para tornar o lint obrigatório (recomendado no futuro),
         # remova o continue-on-error acima.
 
