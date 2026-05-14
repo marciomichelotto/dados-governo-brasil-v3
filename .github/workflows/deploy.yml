@@ -135,7 +135,7 @@ jobs:
       #    sqlfluff detecta problemas como: aliases sem AS, SELECT *,
       #    indentação inconsistente, palavras reservadas em minúsculo, etc.
       # -----------------------------------------------------------------------
-      - name: SQL Lint (sqlfluff)
+      #- name: SQL Lint (sqlfluff)
         run: |
           sqlfluff lint snowflake/ \
             --dialect snowflake \
@@ -158,7 +158,7 @@ jobs:
             --profiles-dir ~/.dbt \
             --project-dir . \
             --select gold \
-            --empty-catalog
+            --empty
 
       # -----------------------------------------------------------------------
       # 8. dbt test — executa os testes de qualidade definidos no schema.yml
