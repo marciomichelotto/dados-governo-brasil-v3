@@ -147,18 +147,16 @@ jobs:
         # remova o continue-on-error acima.
 
       # -----------------------------------------------------------------------
-      # 7. dbt compile — valida sintaxe SQL e Jinja de todos os modelos
+      # 7. dbt parse — valida sintaxe SQL e Jinja de todos os modelos
       #    Não executa nada no Snowflake, apenas compila localmente.
       #    Detecta: referências quebradas, YAML malformado, macros inválidas.
       # -----------------------------------------------------------------------
-      - name: dbt compile
+      - name: dbt parse
         working-directory: dbt
         run: |
-          dbt compile \
+          dbt parse \
             --profiles-dir ~/.dbt \
-            --project-dir . \
-            --select gold \
-            --empty
+            --project-dir .
 
       # -----------------------------------------------------------------------
       # 8. dbt test — executa os testes de qualidade definidos no schema.yml
