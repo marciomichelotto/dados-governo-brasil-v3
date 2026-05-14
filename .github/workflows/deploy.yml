@@ -197,7 +197,7 @@ jobs:
     name: 🚀 Deploy (Snowflake)
     runs-on: ubuntu-latest
     needs: validate                     # ← DEPENDE do validate passar
-    if: github.ref == 'refs/heads/main' # ← SÓ na branch main
+    if: github.ref == 'refs/heads/main' && false # ← SÓ na branch main
 
     environment:
       name: production                  # requer aprovação manual se configurado
