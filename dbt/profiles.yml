@@ -1,14 +1,14 @@
-gov_v3:
+dados_governo:
   target: dev
   outputs:
     dev:
       type: snowflake
-      account: XRFLDVL-YCB69798
-      user: MARCIOMICHELOTTO
-      authenticator: snowflake
-      password: DataEngGuy2727**
-      role: SYSADMIN
-      database: GOV_V3
-      warehouse: COMPUTE_WH
-      schema: dbt_mmichelotto
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+      user: "{{ env_var('SNOWFLAKE_USER') }}"
+      password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
+      role: "{{ env_var('SNOWFLAKE_ROLE', 'SYSADMIN') }}"
+      database: "{{ env_var('SNOWFLAKE_DATABASE') }}"
+      warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE') }}"
+      schema: "{{ env_var('SNOWFLAKE_SCHEMA', 'DBT') }}"
       threads: 4
+      client_session_keep_alive: false
