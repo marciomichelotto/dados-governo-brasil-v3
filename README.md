@@ -1,5 +1,7 @@
 # Dados Governo Brasil v3
 
+> **Sobre esta versão:** esta é a versão com arquitetura de engenharia de dados completa do projeto — Medallion, dbt e CI/CD. Para os principais achados de negócio sobre o orçamento federal (concentração de recursos, crise de execução por ministério), veja **[dados-governo-brasil-v2](https://github.com/marciomichelotto/dados-governo-brasil-v2)**.
+
 Pipeline de dados em **Snowflake + dbt** para ingestão, tratamento e análise de despesas públicas federais em arquitetura **Medallion (Bronze → Silver → Gold)** — com carga incremental via `MERGE`, testes automatizados de qualidade e CI/CD com validação obrigatória antes do deploy.
 
 ---
