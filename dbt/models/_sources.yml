@@ -2,7 +2,7 @@ version: 2
 
 sources:
   - name: silver
-    database: DADOS_GOVERNO
-    schema: SILVER
+    database: GOV_V3
+    schema: DADOS_GOV
     tables:
       - name: TB_SILVER_DESPESAS

@@ -19,73 +19,26 @@
 version: 2
 
 # -----------------------------------------------------------------------------
-# SOURCES — declara TB_SILVER_DESPESAS como fonte oficial
-# Isso cria a linhagem correta no dbt: Silver → Gold (visível no dbt docs)
-# Sem isso, os modelos Gold referenciam a Silver como tabela avulsa,
-# quebrando o lineage graph e dificultando auditoria.
+# SOURCES — a declaração fonte de TB_SILVER_DESPESAS mora em _sources.yml,
+# não aqui. Havia uma segunda declaração `sources: - name: silver` duplicada
+# neste arquivo (com database/schema e nomes de coluna diferentes, nenhum dos
+# dois batendo com a tabela real) — dbt rejeita fonte com mesmo nome definida
+# duas vezes, o que quebrava `dbt run`/`dbt parse` inteiro. Removida daqui;
+# ver _sources.yml para a declaração real.
 # -----------------------------------------------------------------------------
-sources:
-  - name: silver
-    database: DADOS_GOVERNO          # ajuste se o database tiver outro nome
-    schema: SILVER
-    description: >
-      Camada Silver do pipeline de despesas públicas.
-      Dados limpos, tipados e padronizados a partir da Bronze.
-      Fonte primária para todos os modelos analíticos Gold.
-
-    tables:
-      - name: TB_SILVER_DESPESAS
-        description: >
-          Despesas públicas por órgão subordinado e competência mensal.
-          Originadas do Portal da Transparência (despesasPorOrgao.csv).
-          Chave de negócio: orgao_subordinado_cod + mes_ano_dt.
-
-        # Freshness: alerta se Silver ficar mais de 25h sem atualizar
-        # (o pipeline roda diariamente via Snowflake Task)
-        freshness:
-          warn_after: {count: 25, period: hour}
-          error_after: {count: 49, period: hour}
-        loaded_at_field: dt_carga_silver
-
-        columns:
-          - name: orgao_subordinado_cod
-            description: Código do órgão subordinado (chave natural)
-            tests:
-              - not_null
-
-          - name: mes_ano_dt
-            description: Primeiro dia do mês de competência (DATE)
-            tests:
-              - not_null
-
-          - name: orgao_superior
-            description: Nome do ministério / órgão superior
-            tests:
-              - not_null
-
-          - name: valor_pago
-            description: Valor efetivamente pago no mês (R$)
-            tests:
-              - not_null
-              - dbt_utils.expression_is_true:
-                  expression: ">= 0"
-                  name: silver_valor_pago_nao_negativo
-
-          - name: valor_empenhado
-            description: Valor empenhado no mês (R$)
-            tests:
-              - dbt_utils.expression_is_true:
-                  expression: ">= 0"
-                  name: silver_valor_empenhado_nao_negativo
-
-          - name: dt_carga_silver
-            description: Timestamp de quando o registro foi carregado na Silver
-            tests:
-              - not_null
 
 
 # -----------------------------------------------------------------------------
 # MODELS — modelos Gold e seus testes
+#
+# NOTA (auditoria): os testes de coluna abaixo referenciam nomes de um schema
+# gold que nunca chegou a ser implementado (orgao_superior, mes_ano_dt,
+# taxa_execucao_pct, posicao_ranking, total_restos_inscritos...). As views
+# reais (dbt/models/gold/*.sql) usam nome_ministerio, taxa_execucao,
+# ranking_pago, total_restos, sem grão mensal. `dbt run` funciona porque
+# testes não bloqueiam materialização — mas `dbt test`/`dbt build` falha até
+# este arquivo ser reescrito pra bater com as views reais. Fora do escopo
+# desta rodada (dashboard + achados); pendência registrada no README.
 # -----------------------------------------------------------------------------
 models:
 

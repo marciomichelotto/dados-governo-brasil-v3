@@ -1,0 +1,17 @@
+# Dado bruto do Portal da Transparência — baixado manualmente, não versionado
+data/raw/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+
+# dbt
+dbt/target/
+dbt/dbt_packages/
+dbt/logs/
+dbt/target/.lsp/
+
+logs/

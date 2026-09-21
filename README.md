@@ -16,6 +16,49 @@ Este projeto automatiza esse processo de ponta a ponta, permitindo responder per
 
 ---
 
+## 📊 Achados
+
+Direto das 4 views gold, sobre dado real do Portal da Transparência
+(competência mar/25–nov/25, 35 órgãos superiores, **R$ 4,86 trilhões pagos
+no período**).
+
+**3 ministérios concentram 55% de tudo que foi pago.**
+
+| Ministério | Total pago | % do total | Taxa de execução |
+|---|---|---|---|
+| Fazenda | R$ 2,67 tri | 55,0% | 97,3% |
+| Previdência Social | R$ 1,07 tri | 22,0% | 94,4% |
+| Saúde | R$ 224,4 bi | 4,6% | 90,2% |
+
+Fazenda não é ministério operacional — boa parte desse valor é rolagem e
+pagamento de dívida pública, não política pública (leitura aprofundada em
+[dados-governo-brasil-v2](https://github.com/marciomichelotto/dados-governo-brasil-v2)).
+
+**2 ministérios pagam mais da metade do empenhado do ano passado só em restos a pagar.**
+
+| Ministério | % do empenhado em restos | Nível |
+|---|---|---|
+| Empreendedorismo, Microempresa e Pequena Empresa | 56,3% | Risco Extremo |
+| Mulheres | 56,1% | Risco Extremo |
+| Turismo | 36,9% | Risco Alto |
+
+Esses órgãos gastam boa parte do ano quitando o passado, não executando o
+orçamento do próprio exercício.
+
+**327 combinações mês × órgão em alerta crítico absoluto** — restos a pagar
+maior que o próprio empenhado do mês — de 883 linhas totais na tabela de
+alertas, distribuídas em 3 níveis de criticidade.
+
+**A taxa de execução mensal, tirada por média simples entre meses, produz
+número sem sentido em alguns ministérios** — até 1.332% de "execução" no
+Ministério das Mulheres, porque um mês teve `valor_empenhado` perto de zero
+e a média das razões mensais explode. Não escondido: é uma fragilidade real
+de `vw_execucao_orcamentaria` (falta guarda contra denominador pequeno), não
+corrigida nesta rodada — no Power BI, a medida certa pondera pelo total do
+período (`SUM(pago) / SUM(empenhado)`), nunca pela média das taxas mensais.
+
+---
+
 ## 🏗️ Arquitetura
 
 ```mermaid
@@ -104,6 +147,10 @@ dados-governo-brasil-v3/
 │   └── tasks/
 │       └── orchestration.sql   # Cadeia de Tasks automáticas
 │
+├── scripts/
+│   ├── deploy_snowflake.py     # Aplica setup + tabelas + procedures — idempotente
+│   └── carrega_bronze.py       # Carrega o CSV baixado manualmente pro bronze, sem stage S3
+│
 ├── dbt/
 │   ├── dbt_project.yml
 │   ├── packages.yml            # dbt-utils
@@ -143,6 +190,17 @@ dados-governo-brasil-v3/
 
 ### 2. Carga e transformações
 
+**Sem stage S3 configurado** (caminho usado nesta rodada, com dado real):
+
+```bash
+# baixe despesasPorOrgao.csv manualmente em
+# portaldatransparencia.gov.br/download-de-dados/despesas e salve em data/raw/
+python scripts/deploy_snowflake.py   # aplica setup + tabelas + procedures
+python scripts/carrega_bronze.py     # carrega bronze e chama SP_BRONZE_TO_SILVER()
+```
+
+**Com stage S3 configurado** (desenho original):
+
 ```sql
 -- Bronze
 CALL SP_BRONZE_LOAD();
@@ -151,7 +209,7 @@ CALL SP_BRONZE_LOAD();
 CALL SP_BRONZE_TO_SILVER();
 
 -- Gold (MERGE — agrega e calcula KPIs)
-CALL SP_SILVER_TO_GOLD();
+CALL SP_SILVER_TO_GOLD();  -- ver Pendências: redundante com as views dbt e quebrado
 ```
 
 ### 3. Orquestração automática (opcional)
@@ -193,6 +251,37 @@ dbt docs generate && dbt docs serve
 | **`DATE_FROM_PARTS`** | Manter como `VARCHAR` | Permite filtros por range de datas, funções de janela e joins temporais |
 | **dbt para Gold** | SP para tudo | dbt gera lineage graph, documentação e testes automatizados — ferramentas de BI entendem melhor |
 | **MERGE com `ZEROIFNULL`** | Comparação direta `<>` | `NULL <> NULL` retorna `NULL` em SQL, não `TRUE` — sem isso o MERGE nunca detecta mudanças em campos nulos |
+
+---
+
+## ⚠️ Pendências conhecidas
+
+- **Conta Snowflake migrada.** A conta original (`XRFLDVL-YCB69798`) expirou
+  (trial vencido); os dados reais acima rodam numa conta trial diferente,
+  mesmo database/schema (`GOV_V3.DADOS_GOV`). `dbt/profiles.yml` foi
+  corrigido pra ler a senha de `SNOWFLAKE_PASSWORD` no ambiente em vez de
+  texto plano — **a senha antiga ficou exposta publicamente neste repositório
+  desde 13/05/2026 e deveria ser considerada comprometida.**
+- **`schema.yml` (testes dbt) descreve um schema que nunca existiu** —
+  `orgao_subordinado_cod`, `mes_ano_dt`, `taxa_execucao_pct`,
+  `posicao_ranking`, entre outros, não batem com as colunas reais das views
+  (`nome_ministerio`, `taxa_execucao`, `ranking_pago`...). `dbt run` funciona
+  normalmente (testes não bloqueiam materialização), mas `dbt test`/`dbt
+  build` falha até esse arquivo ser reescrito pra bater com as views reais.
+- **`TB_GOLD_DESPESAS_AGREG` e `SP_SILVER_TO_GOLD` são redundantes e estão
+  quebrados** — referenciam colunas que não existem nem na tabela que
+  criam nem na Silver real. As 4 views dbt já cobrem o papel de gold
+  diretamente a partir de `TB_SILVER_DESPESAS`; essa tabela/procedure
+  paralela nunca chegou a rodar com dado real e não está no caminho ativo.
+- **`SP_BRONZE_TO_SILVER` tinha um bug de conversão de data** que zerava a
+  Silver inteira (`TRY_TO_DATE` esperava mês numérico; o Portal usa
+  abreviação em português — `mar/25`, não `03/25`). Corrigido nesta rodada.
+- **Sem stage S3 configurado** — `scripts/carrega_bronze.py` carrega o CSV
+  baixado manualmente do Portal direto pro bronze, sem passar por
+  `sp_bronze_load.sql`/`COPY INTO` (ver seção Execução).
+- As 4 views gold materializaram como **tabela no schema `DADOS_GOV`**
+  nesta rodada, não como view no schema `gold` (configuração de
+  `schema.yml` não teve efeito — mesma causa raiz do item acima).
 
 ---
 

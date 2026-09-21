@@ -12,6 +12,14 @@
 --   • Base para implementar SCD Type 2 no futuro sem reescrever tudo
 -- =============================================================================
 
+-- NOTA (auditoria): esta procedure e o schema.yml do dbt descreviam, antes
+-- desta correção, um schema de Silver (orgao_subordinado_cod, mes_ano_dt,
+-- restos_a_pagar_inscritos/pagos) que nunca existiu em TB_SILVER_DESPESAS
+-- (ver 03_tables.sql) nem nas views gold reais (vw_ranking_ministerios etc,
+-- que já leem orgao_vinculado/valor_restos_pagar/data_referencia). Rodar
+-- como estava quebrava com "invalid identifier" na primeira linha. Corrigido
+-- pra bater com a tabela e as views reais — schema.yml (testes dbt) ainda
+-- descreve o schema antigo e precisa do mesmo tratamento à parte.
 CREATE OR REPLACE PROCEDURE SP_BRONZE_TO_SILVER()
 RETURNS VARIANT
 LANGUAGE SQL
@@ -19,9 +27,6 @@ AS
 $$
 DECLARE
     v_inicio        TIMESTAMP_NTZ := CURRENT_TIMESTAMP();
-    v_rows_inserted NUMBER        := 0;
-    v_rows_updated  NUMBER        := 0;
-    v_rows_errors   NUMBER        := 0;
     v_resultado     VARIANT;
 BEGIN
 
@@ -31,20 +36,27 @@ BEGIN
     -- -------------------------------------------------------------------------
     CREATE OR REPLACE TEMPORARY TABLE TMP_SILVER_STAGING AS
     SELECT
-        -- Chave natural: combinação mês/ano + órgão subordinado
-        -- Usada como chave de upsert no MERGE abaixo
-        TRIM(orgao_subordinado_cod)                          AS orgao_subordinado_cod,
-
-        -- Conversão de mes_ano (ex: "mar/25") para DATE (primeiro dia do mês)
-        -- TRY_TO_DATE retorna NULL em vez de explodir em valores inválidos
-        TRY_TO_DATE(
-            '01/' || REPLACE(TRIM(mes_ano), '/', '/20'),
-            'DD/MM/YYYY'
-        )                                                    AS mes_ano_dt,
+        -- Conversão de mes_ano (ex: "mar/25") para DATE (primeiro dia do mês).
+        -- TRY_TO_DATE com formato DD/MM/YYYY não serve aqui: o Portal usa
+        -- abreviação de mês em português (jan..dez), não número — precisa de
+        -- mapeamento explícito. CASE com ELSE NULL propaga NULL em
+        -- DATE_FROM_PARTS pra linha com mês não reconhecido, mesmo espírito
+        -- do TRY_TO_DATE original (nunca explode, só descarta a linha).
+        DATE_FROM_PARTS(
+            2000 + TRY_CAST(SPLIT_PART(TRIM(mes_ano), '/', 2) AS INTEGER),
+            CASE LEFT(LOWER(TRIM(mes_ano)), 3)
+                WHEN 'jan' THEN 1  WHEN 'fev' THEN 2  WHEN 'mar' THEN 3
+                WHEN 'abr' THEN 4  WHEN 'mai' THEN 5  WHEN 'jun' THEN 6
+                WHEN 'jul' THEN 7  WHEN 'ago' THEN 8  WHEN 'set' THEN 9
+                WHEN 'out' THEN 10 WHEN 'nov' THEN 11 WHEN 'dez' THEN 12
+                ELSE NULL
+            END,
+            1
+        )                                                    AS data_referencia,
 
         -- Limpeza de texto
-        TRIM(orgao_superior_descricao)                       AS orgao_superior,
-        TRIM(orgao_subordinado_descricao)                    AS orgao_subordinado,
+        TRIM(orgao_superior)                                 AS orgao_superior,
+        TRIM(orgao_vinculado)                                AS orgao_vinculado,
 
         -- Conversão numérica: padrão BR (1.234,56) → NUMBER
         -- Sequência: remove aspas → remove ponto de milhar → troca vírgula por ponto
@@ -75,29 +87,17 @@ BEGIN
         TRY_CAST(
             REPLACE(
                 REPLACE(
-                    REPLACE(TRIM(restos_a_pagar_inscritos), '"', ''),
+                    REPLACE(TRIM(valor_restos_pagar), '"', ''),
                 '.',  ''),
             ',', '.') AS NUMBER(20, 2)
-        )                                                    AS restos_a_pagar_inscritos,
-
-        TRY_CAST(
-            REPLACE(
-                REPLACE(
-                    REPLACE(TRIM(restos_a_pagar_pagos), '"', ''),
-                '.',  ''),
-            ',', '.') AS NUMBER(20, 2)
-        )                                                    AS restos_a_pagar_pagos,
-
-        -- Metadados de auditoria (rastreabilidade da carga)
-        CURRENT_TIMESTAMP()                                  AS dt_carga_silver,
-        METADATA$FILENAME                                    AS arquivo_origem
+        )                                                    AS valor_restos_pagar
 
     FROM TB_BRONZE_DESPESAS_V2
 
     -- Filtra somente linhas com chave válida
-    -- (mes_ano e orgao_subordinado_cod são obrigatórios para o MERGE funcionar)
+    -- (mes_ano e orgao_vinculado são obrigatórios para o MERGE funcionar)
     WHERE TRIM(mes_ano) IS NOT NULL
-      AND TRIM(orgao_subordinado_cod) IS NOT NULL;
+      AND TRIM(orgao_vinculado) IS NOT NULL;
 
 
     -- -------------------------------------------------------------------------
@@ -106,71 +106,51 @@ BEGIN
     --   WHEN MATCHED     → atualiza se algum valor numérico mudou
     --   WHEN NOT MATCHED → insere linha nova
     --
-    -- Chave de negócio: (orgao_subordinado_cod + mes_ano_dt)
+    -- Chave de negócio: (orgao_vinculado + data_referencia)
     -- Garante que a mesma competência/órgão não seja duplicada
     -- -------------------------------------------------------------------------
     MERGE INTO TB_SILVER_DESPESAS AS tgt
     USING (
         SELECT * FROM TMP_SILVER_STAGING
-        WHERE mes_ano_dt IS NOT NULL   -- descarta conversões de data inválidas
+        WHERE data_referencia IS NOT NULL   -- descarta conversões de data inválidas
     ) AS src
-        ON  tgt.orgao_subordinado_cod = src.orgao_subordinado_cod
-        AND tgt.mes_ano_dt            = src.mes_ano_dt
+        ON  tgt.orgao_vinculado  = src.orgao_vinculado
+        AND tgt.data_referencia  = src.data_referencia
 
     WHEN MATCHED AND (
         -- Só atualiza se houve mudança real (evita writes desnecessários)
-        ZEROIFNULL(tgt.valor_pago)                 <> ZEROIFNULL(src.valor_pago)
-        OR ZEROIFNULL(tgt.valor_liquidado)         <> ZEROIFNULL(src.valor_liquidado)
-        OR ZEROIFNULL(tgt.valor_empenhado)         <> ZEROIFNULL(src.valor_empenhado)
-        OR ZEROIFNULL(tgt.restos_a_pagar_inscritos)<> ZEROIFNULL(src.restos_a_pagar_inscritos)
-        OR ZEROIFNULL(tgt.restos_a_pagar_pagos)   <> ZEROIFNULL(src.restos_a_pagar_pagos)
+        ZEROIFNULL(tgt.valor_pago)          <> ZEROIFNULL(src.valor_pago)
+        OR ZEROIFNULL(tgt.valor_liquidado)  <> ZEROIFNULL(src.valor_liquidado)
+        OR ZEROIFNULL(tgt.valor_empenhado)  <> ZEROIFNULL(src.valor_empenhado)
+        OR ZEROIFNULL(tgt.valor_restos_pagar) <> ZEROIFNULL(src.valor_restos_pagar)
     )
     THEN UPDATE SET
-        tgt.orgao_superior              = src.orgao_superior,
-        tgt.orgao_subordinado           = src.orgao_subordinado,
-        tgt.valor_empenhado             = src.valor_empenhado,
-        tgt.valor_liquidado             = src.valor_liquidado,
-        tgt.valor_pago                  = src.valor_pago,
-        tgt.restos_a_pagar_inscritos    = src.restos_a_pagar_inscritos,
-        tgt.restos_a_pagar_pagos        = src.restos_a_pagar_pagos,
-        tgt.dt_atualizacao_silver       = CURRENT_TIMESTAMP(),
-        tgt.arquivo_origem              = src.arquivo_origem
+        tgt.orgao_superior      = src.orgao_superior,
+        tgt.valor_empenhado     = src.valor_empenhado,
+        tgt.valor_liquidado     = src.valor_liquidado,
+        tgt.valor_pago          = src.valor_pago,
+        tgt.valor_restos_pagar  = src.valor_restos_pagar,
+        tgt.data_carga          = CURRENT_TIMESTAMP()
 
     WHEN NOT MATCHED THEN INSERT (
-        orgao_subordinado_cod,
-        mes_ano_dt,
+        data_referencia,
         orgao_superior,
-        orgao_subordinado,
+        orgao_vinculado,
         valor_empenhado,
         valor_liquidado,
         valor_pago,
-        restos_a_pagar_inscritos,
-        restos_a_pagar_pagos,
-        dt_carga_silver,
-        dt_atualizacao_silver,
-        arquivo_origem
+        valor_restos_pagar,
+        data_carga
     ) VALUES (
-        src.orgao_subordinado_cod,
-        src.mes_ano_dt,
+        src.data_referencia,
         src.orgao_superior,
-        src.orgao_subordinado,
+        src.orgao_vinculado,
         src.valor_empenhado,
         src.valor_liquidado,
         src.valor_pago,
-        src.restos_a_pagar_inscritos,
-        src.restos_a_pagar_pagos,
-        src.dt_carga_silver,
-        CURRENT_TIMESTAMP(),
-        src.arquivo_origem
+        src.valor_restos_pagar,
+        CURRENT_TIMESTAMP()
     );
-
-
-    -- -------------------------------------------------------------------------
-    -- STEP 3: Captura de métricas pós-MERGE
-    -- -------------------------------------------------------------------------
-    -- Snowflake não expõe rows_inserted/rows_updated diretamente após MERGE,
-    -- mas podemos capturar via query_history ou simplesmente logar o timestamp.
-    -- Para projetos futuros: considere uma tabela de log de execuções.
 
     v_resultado := OBJECT_CONSTRUCT(
         'status',       'SUCCESS',
